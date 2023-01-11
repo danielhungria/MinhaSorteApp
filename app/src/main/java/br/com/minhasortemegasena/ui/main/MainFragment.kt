@@ -23,6 +23,8 @@ class MainFragment : Fragment() {
 
     private val sliderNumber: Int = 25
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSlider()
@@ -30,6 +32,7 @@ class MainFragment : Fragment() {
         mAdView = binding.adViewMainFragment
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+        viewModel.getLotteryData()
     }
 
     private fun setupSlider() {
