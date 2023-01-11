@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import br.com.minhasortemegasena.databinding.FragmentMainBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -23,7 +24,7 @@ class MainFragment : Fragment() {
 
     private val sliderNumber: Int = 25
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
