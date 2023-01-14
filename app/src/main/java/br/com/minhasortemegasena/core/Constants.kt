@@ -8,5 +8,9 @@ object Constants {
 
     const val STATE_SLIDER_MAIN_FRAGMENT_VALUE = "STATE_SLIDER_MAIN_FRAGMENT_VALUE"
 
+    const val UTC = "UTC"
+
+    const val API_DATE_PATTERN = "yyyy-MM-dd"
+
 
 }

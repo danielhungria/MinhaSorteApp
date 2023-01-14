@@ -35,17 +35,6 @@ class MainFragment : Fragment() {
 
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupSlider()
-        mAdView = binding.adViewMainFragment
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-        setupRecycler()
-
-    }
-
     private fun setupRecycler() {
         binding.gridlayoutFragmentMain.apply {
             adapter = mainAdapter.apply {
@@ -58,6 +47,15 @@ class MainFragment : Fragment() {
 
             }
         }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupSlider()
+        mAdView = binding.adViewMainFragment
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        setupRecycler()
+
     }
 
     override fun onCreateView(
