@@ -12,5 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#191919</item>
         <!-- Customize your theme here. -->
+        <item name="toolbarStyle">@style/Widget.Material3.Toolbar.</item>
     </style>
+
+    <style name="Widget.Material3.Toolbar." parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorSurface">#30AF45</item>
+        <item name="colorOnSurface">#30AF45</item>
+    </style>
+
 </resources>
