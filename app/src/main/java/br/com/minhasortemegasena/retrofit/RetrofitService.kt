@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 const val BASE_URL = "https://servicebus2.caixa.gov.br/"
-const val contest_number = "2550"
+const val contest_number = ""
 const val lottery_name = "megasena"
 
 interface RetrofitService {

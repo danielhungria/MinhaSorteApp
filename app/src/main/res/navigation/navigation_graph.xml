@@ -9,7 +9,28 @@
         android:id="@+id/mainFragment"
         android:name="br.com.minhasortemegasena.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main"
-        />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainfragment_to_screenresult"
+            app:destination="@id/screenResultFragment"
+            app:popUpToSaveState="true"
+            app:restoreState="true"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/screenResultFragment"
+        android:name="br.com.minhasortemegasena.ui.resultscreen.ScreenResultContestsFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_screen_result_contest">
+        <action
+            android:id="@+id/action_screenresult_to_mainfragment"
+            app:destination="@id/mainFragment"
+            app:popUpToSaveState="true"
+            app:restoreState="true"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
 
 </navigation>
