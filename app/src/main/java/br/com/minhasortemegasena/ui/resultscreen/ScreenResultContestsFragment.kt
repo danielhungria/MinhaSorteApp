@@ -55,7 +55,9 @@ class ScreenResultContestsFragment : Fragment(){
     }
 
     private fun setContestNumber(numero: Int) {
-        binding.contestNumberFragmentResult.setText(numero.toString())
+        if (numero != null){
+            binding.contestNumberFragmentResult.setText(numero.toString())
+        }
     }
 
     private fun setupAdInterstitialScreen(adRequest: AdRequest) {
@@ -87,10 +89,10 @@ class ScreenResultContestsFragment : Fragment(){
         viewModel.getLotteryData()
         setupAdInterstitialScreen(adRequest)
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            setContestNumber(it.numero)
-            setSortedNumbers(it.listaDezenas)
-            setAccumulated(it.acumulado)
-            setupDate(it.dataApuracao)
+            it.numero?.let { numero -> setContestNumber(numero) }
+            it.listaDezenas?.let { listadezenas -> setSortedNumbers(listadezenas) }
+            it.acumulado?.let { acumulado -> setAccumulated(acumulado) }
+            it.dataApuracao?.let { dataApuracao -> setupDate(dataApuracao) }
         }
     }
 
