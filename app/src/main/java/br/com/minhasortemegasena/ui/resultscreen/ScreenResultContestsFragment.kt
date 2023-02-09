@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import br.com.minhasortemegasena.databinding.FragmentScreenResultContestBinding
@@ -19,7 +20,7 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class ScreenResultContestsFragment : Fragment(){
+class ScreenResultContestsFragment : Fragment() {
 
     private var mInterstitialAds: InterstitialAd? = null
 
@@ -38,9 +39,9 @@ class ScreenResultContestsFragment : Fragment(){
     }
 
     private fun setAccumulated(acumulado: Boolean) = with(binding) {
-        if (acumulado){
+        if (acumulado) {
             resultAccumulatedFragmentResult.text = "Acumulou"
-        }else{
+        } else {
             resultAccumulatedFragmentResult.text = "Não Acumulou"
         }
     }
@@ -55,7 +56,7 @@ class ScreenResultContestsFragment : Fragment(){
     }
 
     private fun setContestNumber(numero: Int) {
-        if (numero != null){
+        if (numero != null) {
             binding.contestNumberFragmentResult.setText(numero.toString())
         }
     }
@@ -89,10 +90,12 @@ class ScreenResultContestsFragment : Fragment(){
         viewModel.getLotteryData()
         setupAdInterstitialScreen(adRequest)
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            it.numero?.let { numero -> setContestNumber(numero) }
-            it.listaDezenas?.let { listadezenas -> setSortedNumbers(listadezenas) }
-            it.acumulado?.let { acumulado -> setAccumulated(acumulado) }
-            it.dataApuracao?.let { dataApuracao -> setupDate(dataApuracao) }
+            it?.let {
+                it.numero?.let { numero -> setContestNumber(numero) }
+                it.listaDezenas?.let { listadezenas -> setSortedNumbers(listadezenas) }
+                it.acumulado?.let { acumulado -> setAccumulated(acumulado) }
+                it.dataApuracao?.let { dataApuracao -> setupDate(dataApuracao) }
+            }?: Toast.makeText(context, "Servidor instável ou Número de concurso inexistente", Toast.LENGTH_LONG).show()
         }
     }
 

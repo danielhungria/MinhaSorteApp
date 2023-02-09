@@ -16,12 +16,13 @@ class ScreenResultViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ): ViewModel() {
 
+    private var numberSelected = ""
     val listLotteryModel = MutableLiveData<LotteryModel>()
     val errorMessage = MutableLiveData<String>()
 
     fun getLotteryData(){
 
-        val request = mainRepository.getLotteryData()
+        val request = mainRepository.getLotteryData(numberSelected)
 
         request.enqueue(object : Callback<LotteryModel> {
             override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {

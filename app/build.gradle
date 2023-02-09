@@ -8,6 +8,15 @@ plugins {
 }
 
 android {
+
+    signingConfigs {
+        debug {
+            storeFile file('/Users/daniel/Desktop/Program/Android/Daniel/keystore')
+            keyAlias 'keystore'
+            storePassword 'Akira01@'
+            keyPassword 'Akira01@'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -22,8 +31,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            debuggable true
+            debuggable false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,7 +43,7 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     kapt {
