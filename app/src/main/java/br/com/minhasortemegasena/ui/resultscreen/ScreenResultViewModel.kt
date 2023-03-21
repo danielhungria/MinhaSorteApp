@@ -14,26 +14,34 @@ import javax.inject.Inject
 @HiltViewModel
 class ScreenResultViewModel @Inject constructor(
     private val mainRepository: MainRepository
-): ViewModel() {
+) : ViewModel() {
 
     val listLotteryModel = MutableLiveData<LotteryModel>()
     val errorMessage = MutableLiveData<String>()
+    var contestNumberViewModel = ""
 
-    fun getLotteryData(){
-
+    fun getLotteryData() {
         val request = mainRepository.getLotteryData()
-
         request.enqueue(object : Callback<LotteryModel> {
             override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
                 listLotteryModel.postValue(response.body())
             }
-
             override fun onFailure(call: Call<LotteryModel>, t: Throwable) {
                 errorMessage.postValue(t.message)
             }
-
         })
+    }
 
+    fun getLotteryWithContestNumber() {
+        val request = mainRepository.getLotteryWithContestNumber(contestNumberViewModel)
+        request.enqueue(object : Callback<LotteryModel> {
+            override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
+                listLotteryModel.postValue(response.body())
+            }
+            override fun onFailure(call: Call<LotteryModel>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
     }
 
 }

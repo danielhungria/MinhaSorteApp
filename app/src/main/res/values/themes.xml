@@ -10,18 +10,31 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">#191919</item>
+        <item name="android:statusBarColor" >#30AF45</item>
         <!-- Customize your theme here. -->
-        <item name="toolbarStyle">@style/Widget.Material3.Toolbar.</item>
+
     </style>
 
     <style name="Widget.Material3.Toolbar." parent="Widget.Material3.Toolbar">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+        <item name="android:statusBarColor" >#30AF45</item>
     </style>
 
     <style name="ThemeOverlay.App.Toolbar" parent="">
         <item name="colorSurface">#30AF45</item>
         <item name="colorOnSurface">#30AF45</item>
     </style>
+
+    <style name="Widget.Material3.Toolbar.LotoFacil" parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar.Lotofacil</item>
+        <item name="android:statusBarColor" >#A7348B</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar.Lotofacil" parent="">
+        <item name="colorSurface">#A7348B</item>
+        <item name="colorOnSurface">#A7348B</item>
+    </style>
+
+    //A7348B
 
 </resources>

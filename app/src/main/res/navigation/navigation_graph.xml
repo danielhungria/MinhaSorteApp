@@ -3,20 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/home_list_games_caixa_fragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="br.com.minhasortemegasena.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainfragment_to_screenresult"
-            app:destination="@id/screenResultFragment"
-            app:popUpToSaveState="true"
-            app:restoreState="true"
-            app:popUpToInclusive="true"/>
-
     </fragment>
 
     <fragment
@@ -24,13 +17,36 @@
         android:name="br.com.minhasortemegasena.ui.resultscreen.ScreenResultContestsFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_screen_result_contest">
-        <action
-            android:id="@+id/action_screenresult_to_mainfragment"
-            app:destination="@id/mainFragment"
-            app:popUpToSaveState="true"
-            app:restoreState="true"
-            app:popUpToInclusive="true"/>
+    </fragment>
 
+
+    <fragment
+        android:id="@+id/support_fragment"
+        android:name="br.com.minhasortemegasena.SupportFragment"
+        tools:layout="@layout/support_fragment"
+        android:label="support_fragment"/>
+
+    <fragment
+        android:id="@+id/home_list_games_caixa_fragment"
+        android:name="br.com.minhasortemegasena.ui.home.HomeFragment"
+        tools:layout="@layout/home_list_games_caixa_fragment"
+        >
+        <action
+            android:id="@+id/action_home_list_games_to_megasena_palpites_fragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/home_list_games_caixa_fragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/home_list_results"
+        android:name="br.com.minhasortemegasena.ui.resultlist.ResultListFragment"
+        tools:layout="@layout/home_list_results_caixa_fragment"
+        >
+        <action
+            android:id="@+id/action_list_results_to_megasena_results_fragment"
+            app:destination="@id/screenResultFragment"
+            />
     </fragment>
 
 </navigation>

@@ -1,4 +1,4 @@
-package br.com.minhasortemegasena.ui.main
+package br.com.minhasortemegasena.ui.games.lotofacil
 
 import androidx.lifecycle.ViewModel
 import br.com.minhasortemegasena.adapter.MainAdapter
@@ -8,26 +8,22 @@ import javax.inject.Inject
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class LotofacilPalpiteViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ): ViewModel() {
 
-    var randomNumberList: List<Int> = emptyList()
-
-    fun submitList(mainAdapter: MainAdapter){
-        mainAdapter.submitList(randomNumberList.map {
+    fun submitList(mainAdapter: MainAdapter, randomNumber: List<Int>){
+        mainAdapter.submitList(randomNumber.map {
             it.toString()
         })
     }
 
     fun randomNumber(sliderValue: Int): List<Int> {
-        randomNumberList = List(sliderValue + 10) { Random.nextInt(1..60) }
+        return List(sliderValue + 10) { Random.nextInt(1..60) }
             .distinct()
             .shuffled()
             .take(sliderValue)
-        return randomNumberList
     }
 
 }

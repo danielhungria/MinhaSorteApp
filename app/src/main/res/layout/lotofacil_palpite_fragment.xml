@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_fragment_main"
-    tools:context="br.com.minhasortemegasena.ui.main.MainFragment">
+    android:background="@drawable/bg_fragment_main">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +18,7 @@
             android:layout_height="0dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardview"
+                android:id="@+id/card_view_lotofacil_palpite"
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -31,18 +29,17 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.appbar.AppBarLayout
-                    android:id="@+id/topbar"
-                    style="@style/Widget.Material3.Toolbar."
+                    android:id="@+id/top_bar_lotofacil_palpite"
+                    style="@style/Widget.Material3.Toolbar.LotoFacil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/toolbar"
+                        android:id="@+id/toolbar_lotofacil_palpite"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         app:navigationIconTint="@color/white"
-                        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
-                        app:title="Mega-Sena Palpites"
+                        app:title="Lotofácil"
                         app:titleCentered="true"
                         app:titleTextColor="@color/white" />
 
@@ -57,10 +54,10 @@
                 android:layout_marginTop="-20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardview" />
+                app:layout_constraintTop_toBottomOf="@+id/card_view_lotofacil_palpite" />
 
             <TextView
-                android:id="@+id/text_view_dezenas_fragment_main"
+                android:id="@+id/text_view_dezenas_fragment_palpite_lotofacil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -72,22 +69,22 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardview" />
+                app:layout_constraintTop_toBottomOf="@id/card_view_lotofacil_palpite" />
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/slider_fragment_main"
+                android:id="@+id/slider_fragment_palpite_lotofacil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="60dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp"
                 android:stepSize="1"
-                android:value="6"
-                android:valueFrom="6"
+                android:value="15"
+                android:valueFrom="15"
                 android:valueTo="20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_dezenas_fragment_main"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_dezenas_fragment_palpite_lotofacil"
                 app:thumbColor="#4A94E4"
                 app:trackColor="#9BC5F3"
 
@@ -95,7 +92,7 @@
 
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView_main_fragment"
+                android:id="@+id/adView_fragment_palpite_lotofacil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -105,12 +102,12 @@
                 ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent"
-                ads:layout_constraintTop_toBottomOf="@+id/slider_fragment_main">
+                ads:layout_constraintTop_toBottomOf="@+id/slider_fragment_palpite_lotofacil">
 
             </com.google.android.gms.ads.AdView>
 
             <TextView
-                android:id="@+id/text_view_title_fragment_main"
+                android:id="@+id/text_view_title_fragment_palpite_lotofacil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -120,14 +117,14 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_fragment_main" />
+                app:layout_constraintTop_toBottomOf="@+id/button_fragment_palpite_lotofacil" />
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gridlayout_fragment_main"
+                android:id="@+id/gridlayout_fragment_palpite_lotofacil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_main"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_palpite_lotofacil"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/item_sorted_number"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -136,7 +133,7 @@
 
 
             <com.google.android.gms.ads.AdView
-                android:id="@+id/adView2_main_fragment"
+                android:id="@+id/adView2_fragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -147,12 +144,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_main">
+                app:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_palpite_lotofacil">
 
             </com.google.android.gms.ads.AdView>
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/button_fragment_main"
+                android:id="@+id/button_fragment_palpite_lotofacil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -162,7 +159,7 @@
                 android:textColor="#FFF4F4F4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adView_main_fragment" />
+                app:layout_constraintTop_toBottomOf="@+id/adView_fragment_palpite_lotofacil" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
