@@ -10,9 +10,7 @@ import kotlin.random.nextInt
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-): ViewModel() {
+class MainViewModel @Inject constructor(): ViewModel() {
 
     var randomNumberList: List<Int> = emptyList()
 

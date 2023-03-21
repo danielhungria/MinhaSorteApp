@@ -31,6 +31,9 @@ class HomeFragment: Fragment() {
         binding.cardViewItemMegaSena.setOnClickListener {
             findNavController().navigate(R.id.action_home_list_games_to_megasena_palpites_fragment)
         }
+        binding.cardViewItemLotofacil.setOnClickListener {
+            findNavController().navigate(R.id.action_home_list_games_to_lotofacil_palpites_fragment)
+        }
     }
 
 }

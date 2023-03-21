@@ -1,4 +1,4 @@
-package br.com.minhasortemegasena.ui.resultscreen
+package br.com.minhasortemegasena.ui.games.lotofacil
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ScreenResultViewModel @Inject constructor(
+class LotofacilResultViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
 
@@ -21,7 +21,7 @@ class ScreenResultViewModel @Inject constructor(
     var contestNumberViewModel = ""
 
     fun getLotteryData() {
-        val request = mainRepository.getLotteryData("megasena")
+        val request = mainRepository.getLotteryData("lotofacil")
         request.enqueue(object : Callback<LotteryModel> {
             override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
                 listLotteryModel.postValue(response.body())
@@ -33,7 +33,7 @@ class ScreenResultViewModel @Inject constructor(
     }
 
     fun getLotteryWithContestNumber() {
-        val request = mainRepository.getLotteryWithContestNumber(contestNumberViewModel,"megasena")
+        val request = mainRepository.getLotteryWithContestNumber(contestNumberViewModel,"lotofacil")
         request.enqueue(object : Callback<LotteryModel> {
             override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
                 listLotteryModel.postValue(response.body())

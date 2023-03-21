@@ -1,5 +1,7 @@
 package br.com.minhasortemegasena.ui.games.lotofacil
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.minhasortemegasena.adapter.MainAdapter
 import br.com.minhasortemegasena.repositories.MainRepository
@@ -9,21 +11,29 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class LotofacilPalpiteViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-): ViewModel() {
+class LotofacilPalpiteViewModel @Inject constructor(): ViewModel() {
 
-    fun submitList(mainAdapter: MainAdapter, randomNumber: List<Int>){
-        mainAdapter.submitList(randomNumber.map {
+    private val _randomNumberList = MutableLiveData<List<Int>>()
+    private val randomNumberList: LiveData<List<Int>> = _randomNumberList
+
+    fun generateRandomNumbers(sliderValue: Int) {
+        _randomNumberList.value = randomNumber(sliderValue)
+    }
+
+    private fun randomNumber(sliderValue: Int): List<Int> {
+        val list = mutableListOf<Int>()
+        while (list.size < sliderValue) {
+            val randomNumber = (1..25).random()
+            if (randomNumber !in list) {
+                list.add(randomNumber)
+            }
+        }
+        return list
+    }
+
+    fun submitList(mainAdapter: MainAdapter){
+        mainAdapter.submitList(randomNumberList.value?.map {
             it.toString()
         })
     }
-
-    fun randomNumber(sliderValue: Int): List<Int> {
-        return List(sliderValue + 10) { Random.nextInt(1..60) }
-            .distinct()
-            .shuffled()
-            .take(sliderValue)
-    }
-
 }

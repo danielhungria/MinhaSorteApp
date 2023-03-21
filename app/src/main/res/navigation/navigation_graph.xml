@@ -36,6 +36,10 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/home_list_games_caixa_fragment"
             />
+        <action
+            android:id="@+id/action_home_list_games_to_lotofacil_palpites_fragment"
+            app:destination="@id/lotofacil_palpite_fragment"
+            />
     </fragment>
 
     <fragment
@@ -47,6 +51,21 @@
             android:id="@+id/action_list_results_to_megasena_results_fragment"
             app:destination="@id/screenResultFragment"
             />
+        <action
+            android:id="@+id/action_list_results_to_lotofacil_results_fragment"
+            app:destination="@+id/fragment_lotofacil_result_contest"
+            />
     </fragment>
+
+    <fragment
+        android:id="@+id/lotofacil_palpite_fragment"
+        android:name="br.com.minhasortemegasena.ui.games.lotofacil.LotofacilPalpiteFragment"
+        tools:layout="@layout/lotofacil_palpite_fragment"
+        />
+    <fragment
+        android:id="@+id/fragment_lotofacil_result_contest"
+        android:name="br.com.minhasortemegasena.ui.games.lotofacil.LotofacilResultFragment"
+        tools:layout="@layout/fragment_lotofacil_result_contest"
+        />
 
 </navigation>

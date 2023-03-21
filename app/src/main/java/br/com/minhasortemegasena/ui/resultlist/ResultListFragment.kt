@@ -32,6 +32,9 @@ class ResultListFragment: Fragment() {
         binding.cardViewItemMegaSena.setOnClickListener {
             findNavController().navigate(R.id.action_list_results_to_megasena_results_fragment)
         }
+        binding.cardViewItemLotofacil.setOnClickListener {
+            findNavController().navigate(R.id.action_list_results_to_lotofacil_results_fragment)
+        }
     }
 
 }

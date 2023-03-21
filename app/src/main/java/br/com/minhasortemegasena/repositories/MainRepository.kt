@@ -13,9 +13,9 @@ class MainRepository @Inject constructor(private val retrofitService: RetrofitSe
 
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun getLotteryData() = retrofitService.getLotteryData()
+    fun getLotteryData(lotteryName: String) = retrofitService.getLotteryData(lotteryName)
 
-    fun getLotteryWithContestNumber(contestNumber: String) = retrofitService.getLotteryWithContestNumber(contestNumber)
+    fun getLotteryWithContestNumber(contestNumber: String, lotteryName: String) = retrofitService.getLotteryWithContestNumber(contestNumber,lotteryName)
 
     fun querySupportService(): Task<QuerySnapshot> {
         return firebaseFireStore
