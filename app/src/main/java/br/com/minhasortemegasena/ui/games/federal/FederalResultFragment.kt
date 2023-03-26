@@ -97,7 +97,10 @@ class FederalResultFragment : Fragment() {
                 binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
             }
         }
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
     }
+
     override fun onPause() {
         super.onPause()
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)

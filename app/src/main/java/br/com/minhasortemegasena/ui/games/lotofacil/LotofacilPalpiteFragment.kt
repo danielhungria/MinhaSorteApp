@@ -64,6 +64,12 @@ class LotofacilPalpiteFragment : Fragment() {
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
+    }
+
     private fun setupSlider() {
         binding.sliderFragmentPalpiteLotofacil.addOnChangeListener { slider, value, fromUser ->
             val sliderN = value.toInt()

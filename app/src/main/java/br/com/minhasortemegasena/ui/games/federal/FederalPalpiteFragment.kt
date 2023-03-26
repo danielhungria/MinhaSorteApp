@@ -62,6 +62,12 @@ class FederalPalpiteFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
+    }
+
     private fun setupNumberGenerated() {
         binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
             viewModel.generateRandomNumbers()

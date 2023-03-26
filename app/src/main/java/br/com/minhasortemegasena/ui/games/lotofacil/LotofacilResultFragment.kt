@@ -97,6 +97,8 @@ class LotofacilResultFragment : Fragment() {
                 binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
             }
         }
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
     }
 
     override fun onPause() {
