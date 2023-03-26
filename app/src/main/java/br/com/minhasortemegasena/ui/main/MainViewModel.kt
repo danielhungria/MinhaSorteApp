@@ -13,6 +13,8 @@ import kotlin.random.nextInt
 class MainViewModel @Inject constructor(): ViewModel() {
 
     var randomNumberList: List<Int> = emptyList()
+    var adLoad: Int = 0
+
 
     fun submitList(mainAdapter: MainAdapter){
         mainAdapter.submitList(randomNumberList.map {

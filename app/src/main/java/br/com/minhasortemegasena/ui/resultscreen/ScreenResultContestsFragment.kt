@@ -2,15 +2,13 @@ package br.com.minhasortemegasena.ui.resultscreen
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,9 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import br.com.minhasortemegasena.R
 import br.com.minhasortemegasena.adapter.ScreenResultAdapter
 import br.com.minhasortemegasena.databinding.FragmentScreenResultContestBinding
+import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -39,6 +40,8 @@ class ScreenResultContestsFragment : Fragment() {
     private lateinit var mAdView: AdView
 
     private var contestNumberActual = 0
+    private var mInterstitialAd: InterstitialAd? = null
+
 
 
     override fun onCreateView(
@@ -52,21 +55,25 @@ class ScreenResultContestsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        AD_COUNT++
         setupRecycler()
         setupAd()
         setupEditTextContestNumber()
         setupButtonRefresh()
+        setupAdInterstitial()
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            setContestNumber(it.numero)
-            setAccumulated(
-                it.acumulado,
-                it.valorEstimadoProximoConcurso,
-                it.listaRateioPremio.first().valorPremio
-            )
-            setupDate(it.dataApuracao)
-            setupNextDate(it.dataProximoConcurso)
-            screenResultAdapter.updateList(it.listaDezenas)
-            contestNumberActual = it.numero
+            if (it.numero!=null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas !=null && it.listaRateioPremio!=null) {
+                setContestNumber(it.numero)
+                setAccumulated(
+                    it.acumulado,
+                    it.valorEstimadoProximoConcurso,
+                    it.listaRateioPremio.first().valorPremio
+                )
+                setupDate(it.dataApuracao)
+                setupNextDate(it.dataProximoConcurso)
+                screenResultAdapter.updateList(it.listaDezenas)
+                contestNumberActual = it.numero
+            }
         }
         viewModel.getLotteryWithContestNumber()
         binding.toolbarScreenResult.setNavigationOnClickListener {
@@ -170,4 +177,30 @@ class ScreenResultContestsFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
     }
+
+    private fun setupAdInterstitial() {
+        if (AD_COUNT>=2){
+            val adRequest = AdRequest.Builder().build()
+            InterstitialAd.load(
+                requireContext(),
+                getString(R.string.ad_view_interstitial_default),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        adError.toString().let { Log.d("Fragment", it) }
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d("Fragment", "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                        mInterstitialAd?.show(requireActivity())
+                        AD_COUNT=0
+                    }
+                }
+            )
+        }
+
+    }
+
 }

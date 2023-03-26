@@ -42,7 +42,8 @@
                         app:navigationIconTint="@color/white"
                         app:title="Lotofácil"
                         app:titleCentered="true"
-                        app:titleTextColor="@color/white" />
+                        app:titleTextColor="@color/white"
+                        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"/>
 
                 </com.google.android.material.appbar.AppBarLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -100,7 +101,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                ads:adUnitId="@string/ad_banner_default"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent"
                 ads:layout_constraintTop_toBottomOf="@+id/slider_fragment_palpite_lotofacil">
@@ -141,7 +142,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 app:adSize="MEDIUM_RECTANGLE"
-                app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:adUnitId="@string/ad_banner_default"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

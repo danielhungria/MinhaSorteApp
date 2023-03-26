@@ -1,6 +1,7 @@
 package br.com.minhasortemegasena.retrofit
 
 import br.com.minhasortemegasena.model.LotteryModel
+import br.com.minhasortemegasena.model.ResultFederalModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,6 +14,10 @@ interface RetrofitService {
     fun getLotteryData(
         @Path("lottery_name") lotteryName: String
     ): Call<LotteryModel>
+
+    @GET("portaldeloterias/api/federal/")
+    fun getLotteryDataFederal(
+    ): Call<ResultFederalModel>
 
     @GET("portaldeloterias/api/{lottery_name}/{contest_number}")
     fun getLotteryWithContestNumber(

@@ -15,6 +15,8 @@ class MainRepository @Inject constructor(private val retrofitService: RetrofitSe
 
     fun getLotteryData(lotteryName: String) = retrofitService.getLotteryData(lotteryName)
 
+    fun getLotteryDataFederal() = retrofitService.getLotteryDataFederal()
+
     fun getLotteryWithContestNumber(contestNumber: String, lotteryName: String) = retrofitService.getLotteryWithContestNumber(contestNumber,lotteryName)
 
     fun querySupportService(): Task<QuerySnapshot> {

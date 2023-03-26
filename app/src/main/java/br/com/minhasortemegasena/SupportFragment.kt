@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import br.com.minhasortemegasena.databinding.SupportFragmentBinding
+import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
@@ -36,7 +37,7 @@ class SupportFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBannerAd()
         setupAdInterstitial()
-        viewModel.adLoad++
+        AD_COUNT++
         binding.buttonSendSupportFragment.setOnClickListener {
             val title = binding.textInputEditTitleSupportFragment.text.toString()
             val text = binding.textInputEditTextSupportFragment.text.toString()
@@ -56,11 +57,11 @@ class SupportFragment: Fragment() {
     }
 
     private fun setupAdInterstitial() {
-        if (viewModel.adLoad>=2){
+        if (AD_COUNT>=2){
             val adRequest = AdRequest.Builder().build()
             InterstitialAd.load(
                 requireContext(),
-                "ca-app-pub-3940256099942544/6300978111",
+                getString(R.string.ad_view_interstitial_default),
                 adRequest,
                 object : InterstitialAdLoadCallback() {
                     override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -72,7 +73,7 @@ class SupportFragment: Fragment() {
                         Log.d("Fragment", "Ad was loaded.")
                         mInterstitialAd = interstitialAd
                         mInterstitialAd?.show(requireActivity())
-                        viewModel.adLoad=0
+                        AD_COUNT=0
                     }
                 }
             )

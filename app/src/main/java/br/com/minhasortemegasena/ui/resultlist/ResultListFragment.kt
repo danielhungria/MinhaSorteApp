@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import br.com.minhasortemegasena.R
 import br.com.minhasortemegasena.databinding.HomeListGamesCaixaFragmentBinding
 import br.com.minhasortemegasena.databinding.HomeListResultsCaixaFragmentBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ResultListFragment: Fragment() {
 
     private lateinit var binding: HomeListResultsCaixaFragmentBinding
+    private lateinit var mAdView: AdView
 
 
     override fun onCreateView(
@@ -35,6 +38,16 @@ class ResultListFragment: Fragment() {
         binding.cardViewItemLotofacil.setOnClickListener {
             findNavController().navigate(R.id.action_list_results_to_lotofacil_results_fragment)
         }
+        binding.cardViewItemFederal.setOnClickListener {
+            findNavController().navigate(R.id.action_list_results_to_federal_results_fragment)
+        }
+        setupAD()
+    }
+
+    private fun setupAD() {
+        mAdView = binding.adViewBannerSupportFragment
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
 }

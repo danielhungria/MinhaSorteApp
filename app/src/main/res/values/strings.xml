@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MinhaSorte</string>
+    <string name="ad_banner_default">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_view_interstitial_default">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

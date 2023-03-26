@@ -19,6 +19,8 @@ class ScreenResultViewModel @Inject constructor(
     val listLotteryModel = MutableLiveData<LotteryModel>()
     val errorMessage = MutableLiveData<String>()
     var contestNumberViewModel = ""
+    var adLoad: Int = 0
+
 
     fun getLotteryData() {
         val request = mainRepository.getLotteryData("megasena")
@@ -43,5 +45,7 @@ class ScreenResultViewModel @Inject constructor(
             }
         })
     }
+
+
 
 }
