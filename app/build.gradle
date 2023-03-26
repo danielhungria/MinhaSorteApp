@@ -79,7 +79,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     //AdMob
-    implementation 'com.google.android.gms:play-services-ads:21.3.0'
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
