@@ -10,21 +10,24 @@ import kotlin.random.nextInt
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-): ViewModel() {
+class MainViewModel @Inject constructor(): ViewModel() {
 
-    fun submitList(mainAdapter: MainAdapter, randomNumber: List<Int>){
-        mainAdapter.submitList(randomNumber.map {
+    var randomNumberList: List<Int> = emptyList()
+    var adLoad: Int = 0
+
+
+    fun submitList(mainAdapter: MainAdapter){
+        mainAdapter.submitList(randomNumberList.map {
             it.toString()
         })
     }
 
     fun randomNumber(sliderValue: Int): List<Int> {
-        return List(sliderValue + 5) { Random.nextInt(1..60) }
+        randomNumberList = List(sliderValue + 10) { Random.nextInt(1..60) }
             .distinct()
             .shuffled()
             .take(sliderValue)
+        return randomNumberList
     }
 
 }

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_federal_result_contest"
+    android:background="#EDEDED">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardview_screen_result"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="1dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/topbar_screen_result"
+                    style="@style/Widget.Material3.Toolbar.Federal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbar_screen_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
+                        app:navigationIconTint="@color/white"
+                        app:title="Resultado Federal"
+                        app:titleCentered="true"
+                        app:titleTextColor="@color/white" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:id="@+id/imageview_megasena_screen_result"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/federal_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardview_screen_result"
+                android:scaleType="centerCrop"/>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/button_refresh_fragment_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_megasena_screen_result"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:icon="@drawable/baseline_refresh_24"
+                android:visibility="gone"
+                android:text="Resultado Atual"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view_contest_screen_result"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/status_bar_federal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_refresh_fragment_main">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title_contest_fragment_result"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Concurso nº"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/title_data_fragment_result"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_text_contest_number_fragment_result"/>
+
+                <EditText
+                    android:id="@+id/edit_text_contest_number_fragment_result"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLength="4"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:inputType="number"
+                    tools:text="2554"
+                    android:drawableRight="@drawable/baseline_search_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:textAlignment="viewEnd"
+                    app:layout_constraintStart_toEndOf="@+id/title_contest_fragment_result"
+                    app:layout_constraintTop_toTopOf="@+id/title_contest_fragment_result"
+                    app:layout_constraintBottom_toBottomOf="@+id/title_contest_fragment_result"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/title_data_fragment_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Data"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_margin="15dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/edit_text_contest_number_fragment_result"/>
+
+                    <TextView
+                        android:id="@+id/text_date_fragment_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="35dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/title_data_fragment_result"
+                        app:layout_constraintStart_toEndOf="@+id/title_data_fragment_result"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_data_fragment_result"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textAlignment="textEnd"
+                        tools:text="01/01/2023" />
+
+                    <TextView
+                        android:id="@+id/number_sorted_contest_fragment_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="035154"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:textAlignment="textEnd"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/title_first_reward_sorted_contest_fragment_result"
+                        app:layout_constraintStart_toEndOf="@+id/title_first_reward_sorted_contest_fragment_result"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_first_reward_sorted_contest_fragment_result"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/title_first_reward_sorted_contest_fragment_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1º Prêmio"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginVertical="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/title_contest_fragment_result"
+                        app:layout_constraintEnd_toStartOf="@+id/number_sorted_contest_fragment_result"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/reward_first_place_contest_fragment_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R$ 500.000,00"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:layout_marginVertical="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/title_first_reward_sorted_contest_fragment_result"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view_federal_table"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginVertical="10dp"
+                        app:layout_constraintTop_toBottomOf="@+id/reward_first_place_contest_fragment_result"
+                        app:cardBackgroundColor="#1C4887"
+                        />
+
+                    <TextView
+                        android:id="@+id/title_position_contest_fragment_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Posição"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_federal_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_federal_table"
+                        app:layout_constraintEnd_toStartOf="@+id/title_bilhete_contest_fragment_result"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="3dp"/>
+
+                    <TextView
+                        android:id="@+id/title_bilhete_contest_fragment_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bilhete"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_federal_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_federal_table"
+                        app:layout_constraintStart_toEndOf="@+id/title_position_contest_fragment_result"
+                        app:layout_constraintEnd_toStartOf="@+id/title_premio_contest_fragment_result"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="3dp"/>
+
+                    <TextView
+                        android:id="@+id/title_premio_contest_fragment_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prêmio"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_federal_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_federal_table"
+                        app:layout_constraintStart_toEndOf="@+id/title_bilhete_contest_fragment_result"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:elevation="3dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_federal_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@+id/card_view_federal_table"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:listitem="@layout/item_list_federal_result"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView_result_fragment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                ads:adSize="MEDIUM_RECTANGLE"
+                ads:adUnitId="@string/ad_banner_default"
+                ads:layout_constraintTop_toBottomOf="@+id/card_view_contest_screen_result"
+                ads:layout_constraintBottom_toBottomOf="parent"
+                ads:layout_constraintEnd_toEndOf="parent"
+                ads:layout_constraintStart_toStartOf="parent">
+
+            </com.google.android.gms.ads.AdView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
-package br.com.minhasortemegasena.ui.resultscreen
+package br.com.minhasortemegasena.ui.games.lotofacil
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +11,24 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.minhasortemegasena.R
 import br.com.minhasortemegasena.adapter.ScreenResultAdapter
+import br.com.minhasortemegasena.databinding.FragmentLotofacilResultContestBinding
 import br.com.minhasortemegasena.databinding.FragmentScreenResultContestBinding
+import br.com.minhasortemegasena.util.Constants
 import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -29,11 +36,11 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class ScreenResultContestsFragment : Fragment() {
+class LotofacilResultFragment : Fragment() {
 
-    private val viewModel: ScreenResultViewModel by viewModels()
+    private val viewModel: LotofacilResultViewModel by viewModels()
 
-    private lateinit var binding: FragmentScreenResultContestBinding
+    private lateinit var binding: FragmentLotofacilResultContestBinding
 
     private val screenResultAdapter = ScreenResultAdapter()
 
@@ -49,20 +56,20 @@ class ScreenResultContestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentScreenResultContestBinding.inflate(inflater, container, false)
+        binding = FragmentLotofacilResultContestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AD_COUNT++
         setupRecycler()
         setupAd()
         setupEditTextContestNumber()
         setupButtonRefresh()
         setupAdInterstitial()
+        AD_COUNT++
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            if (it.numero!=null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas !=null && it.listaRateioPremio!=null) {
+            if (it.numero!=null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas !=null) {
                 setContestNumber(it.numero)
                 setAccumulated(
                     it.acumulado,
@@ -79,6 +86,7 @@ class ScreenResultContestsFragment : Fragment() {
         binding.toolbarScreenResult.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
     }
 
     override fun onResume() {
@@ -89,6 +97,11 @@ class ScreenResultContestsFragment : Fragment() {
                 binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
     private fun setupDate(dataApuracao: String) {
@@ -125,7 +138,7 @@ class ScreenResultContestsFragment : Fragment() {
     private fun setupRecycler() {
         binding.gridlayoutFragmentScreenResult.apply {
             adapter = screenResultAdapter
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 6)
         }
     }
 

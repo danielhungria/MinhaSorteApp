@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
     def fragment_version = "1.5.4"
     def navigationVersion = "2.5.3"
 

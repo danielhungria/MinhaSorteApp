@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/title_position_contest_fragment_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2º"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/title_bilhete_contest_fragment_result"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="center"
+        android:elevation="3dp"/>
+
+    <TextView
+        android:id="@+id/title_bilhete_contest_fragment_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="035154"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/title_position_contest_fragment_result"
+        app:layout_constraintEnd_toStartOf="@+id/title_premio_contest_fragment_result"
+        android:textAlignment="center"
+        android:elevation="3dp"/>
+
+    <TextView
+        android:id="@+id/title_premio_contest_fragment_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="R$ 250.000,00"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/title_bilhete_contest_fragment_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="3dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package br.com.minhasortemegasena.ui.resultscreen
+package br.com.minhasortemegasena.ui.games.federal
 
 import android.content.Context
 import android.os.Bundle
@@ -9,13 +9,15 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhasortemegasena.R
-import br.com.minhasortemegasena.adapter.ScreenResultAdapter
-import br.com.minhasortemegasena.databinding.FragmentScreenResultContestBinding
+import br.com.minhasortemegasena.adapter.FederalResultAdapter
+import br.com.minhasortemegasena.databinding.FragmentFederalResultContestBinding
+import br.com.minhasortemegasena.util.Constants
 import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -29,19 +31,19 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class ScreenResultContestsFragment : Fragment() {
+class FederalResultFragment : Fragment() {
 
-    private val viewModel: ScreenResultViewModel by viewModels()
+    private val viewModel: FederalResultViewModel by viewModels()
 
-    private lateinit var binding: FragmentScreenResultContestBinding
+    private lateinit var binding: FragmentFederalResultContestBinding
 
-    private val screenResultAdapter = ScreenResultAdapter()
+    private val federalResultAdapter = FederalResultAdapter()
 
     private lateinit var mAdView: AdView
 
     private var contestNumberActual = 0
-    private var mInterstitialAd: InterstitialAd? = null
 
+    private var mInterstitialAd: InterstitialAd? = null
 
 
     override fun onCreateView(
@@ -49,37 +51,43 @@ class ScreenResultContestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentScreenResultContestBinding.inflate(inflater, container, false)
+        binding = FragmentFederalResultContestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AD_COUNT++
         setupRecycler()
         setupAd()
         setupEditTextContestNumber()
         setupButtonRefresh()
-        setupAdInterstitial()
+        setPopBackStack()
+        viewModel.getLotteryData()
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            if (it.numero!=null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas !=null && it.listaRateioPremio!=null) {
-                setContestNumber(it.numero)
-                setAccumulated(
-                    it.acumulado,
-                    it.valorEstimadoProximoConcurso,
-                    it.listaRateioPremio.first().valorPremio
-                )
-                setupDate(it.dataApuracao)
-                setupNextDate(it.dataProximoConcurso)
-                screenResultAdapter.updateList(it.listaDezenas)
+            if (it.numero!=null && it.acumulado != null && it.dezenasSorteadasOrdemSorteio != null && it.listaDezenas !=null && it.listaRateioPremio!=null){
                 contestNumberActual = it.numero
+                setContestNumber(it.numero)
+                setupDate(it.dataApuracao)
+                setReward(it.listaRateioPremio.first().valorPremio)
+                binding.numberSortedContestFragmentResult.text = it.dezenasSorteadasOrdemSorteio.first()
             }
         }
+        viewModel.listaRateioPremio.observe(viewLifecycleOwner){
+            federalResultAdapter.updateList(it)
+        }
+        viewModel.getLotteryData()
         viewModel.getLotteryWithContestNumber()
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
+        setupAdInterstitial()
+        AD_COUNT++
+    }
+
+    private fun setPopBackStack() {
         binding.toolbarScreenResult.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -90,6 +98,16 @@ class ScreenResultContestsFragment : Fragment() {
             }
         }
     }
+    override fun onPause() {
+        super.onPause()
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)
+    }
+
+    private fun setReward(it: Double) {
+        val numberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
+        val numberFormatted =  numberFormat.format(it)
+        binding.rewardFirstPlaceContestFragmentResult.text = numberFormatted.toString()
+    }
 
     private fun setupDate(dataApuracao: String) {
         val dateformat = SimpleDateFormat(dataApuracao, Locale.getDefault())
@@ -98,34 +116,10 @@ class ScreenResultContestsFragment : Fragment() {
         binding.textDateFragmentResult.text = dateformated
     }
 
-    private fun setupNextDate(dataProximoConcurso: String) {
-        val dateformat = SimpleDateFormat(dataProximoConcurso, Locale.getDefault())
-        val date = dateformat.parse(dataProximoConcurso)
-        val dateformated = date?.let { dateformat.format(it) }
-        binding.textNextDateFragmentResult.text = dateformated
-    }
-
-    private fun setAccumulated(
-        acumulado: Boolean,
-        valorEstimadoProximoConcurso: Double,
-        valorDoPremio: Double
-    ) = with(binding) {
-        val numberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
-        val valorPremioFormatado = numberFormat.format(valorDoPremio)
-        val valorEstimadoFormatado = numberFormat.format(valorEstimadoProximoConcurso)
-        if (acumulado) {
-            titleAccumulatedFragmentResult.text = "Acumulado"
-            textAccumulatedFragmentResult.text = valorEstimadoFormatado
-        } else {
-            titleAccumulatedFragmentResult.text = "Premiação"
-            textAccumulatedFragmentResult.text = valorPremioFormatado
-        }
-    }
-
     private fun setupRecycler() {
-        binding.gridlayoutFragmentScreenResult.apply {
-            adapter = screenResultAdapter
-            layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerFederalResult.apply {
+            adapter = federalResultAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 
@@ -169,7 +163,6 @@ class ScreenResultContestsFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun setupAd() {
@@ -179,7 +172,7 @@ class ScreenResultContestsFragment : Fragment() {
     }
 
     private fun setupAdInterstitial() {
-        if (AD_COUNT>=2){
+        if (AD_COUNT >=2){
             val adRequest = AdRequest.Builder().build()
             InterstitialAd.load(
                 requireContext(),

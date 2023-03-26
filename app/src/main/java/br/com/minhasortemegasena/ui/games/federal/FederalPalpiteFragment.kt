@@ -1,92 +1,79 @@
-package br.com.minhasortemegasena.ui.main
+package br.com.minhasortemegasena.ui.games.federal
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import br.com.minhasortemegasena.R
-import br.com.minhasortemegasena.adapter.MainAdapter
-import br.com.minhasortemegasena.databinding.FragmentMainBinding
+import br.com.minhasortemegasena.databinding.FederalPalpiteFragmentBinding
 import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class FederalPalpiteFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainBinding
-
+    private lateinit var binding: FederalPalpiteFragmentBinding
     private lateinit var mAdView: AdView
     private lateinit var mAdView2: AdView
-
-    private val viewModel: MainViewModel by viewModels()
-
-    private val mainAdapter = MainAdapter()
-
-    private var sliderValue = 6
     private var mInterstitialAd: InterstitialAd? = null
 
+    private val viewModel: FederalPalpiteViewModel by viewModels()
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAD()
+        setupNumberGenerated()
+        AD_COUNT++
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
+        val generatedNumber = viewModel.randomNumberList.value?.first()
+        if (generatedNumber != null) {
+            binding.textViewFragmentPalpiteFederal.text = generatedNumber.toString()
+        }
+        binding.toolbarLotofacilPalpite.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        setupAdInterstitial()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FederalPalpiteFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupSlider()
-        setupAD()
-        setupRecycler()
-        setupAdInterstitial()
-        AD_COUNT++
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
+    override fun onPause() {
+        super.onPause()
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
-    private fun setupSlider() {
-
-        binding.sliderFragmentMain.addOnChangeListener { slider, value, fromUser ->
-            val sliderN = value.toInt()
-            sliderValue = sliderN
-        }
-
-    }
-
-    private fun setupRecycler() {
-        binding.gridlayoutFragmentMain.apply {
-            adapter = mainAdapter.apply {
-                viewModel.submitList(mainAdapter)
-                binding.buttonFragmentMain.setOnClickListener {
-                    viewModel.randomNumber(sliderValue)
-                    viewModel.submitList(mainAdapter)
-                }
-            }
-            layoutManager = GridLayoutManager(requireContext(), 6).apply {
-
-            }
+    private fun setupNumberGenerated() {
+        binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
+            viewModel.generateRandomNumbers()
+            val generatedNumber = viewModel.randomNumberList.value?.first().toString()
+            val formattedNumber = String.format("%04d", generatedNumber.toInt())
+            binding.textViewFragmentPalpiteFederal.text = formattedNumber
         }
     }
-
 
     private fun setupAD() {
-        mAdView = binding.adViewMainFragment
-        mAdView2 = binding.adView2MainFragment
+        mAdView = binding.adViewFragmentPalpiteLotofacil
+        mAdView2 = binding.adView2Fragment
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
         mAdView2.loadAd(adRequest)
