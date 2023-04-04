@@ -2,8 +2,6 @@ package br.com.minhasortemegasena.ui.games.lotofacil
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,23 +10,22 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhasortemegasena.R
+import br.com.minhasortemegasena.adapter.LotofacilResultAdapter
 import br.com.minhasortemegasena.adapter.ScreenResultAdapter
 import br.com.minhasortemegasena.databinding.FragmentLotofacilResultContestBinding
-import br.com.minhasortemegasena.databinding.FragmentScreenResultContestBinding
-import br.com.minhasortemegasena.util.Constants
+import br.com.minhasortemegasena.model.ResultFederalModel
 import br.com.minhasortemegasena.util.Constants.AD_COUNT
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -44,11 +41,12 @@ class LotofacilResultFragment : Fragment() {
 
     private val screenResultAdapter = ScreenResultAdapter()
 
+    private val lotofacilResultAdapter = LotofacilResultAdapter()
+
     private lateinit var mAdView: AdView
 
     private var contestNumberActual = 0
     private var mInterstitialAd: InterstitialAd? = null
-
 
 
     override fun onCreateView(
@@ -63,18 +61,20 @@ class LotofacilResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
+        setupRecyclerDetailResult()
         setupAd()
         setupEditTextContestNumber()
         setupButtonRefresh()
         setupAdInterstitial()
+        setupButtonSearchContestNumber()
         AD_COUNT++
         viewModel.listLotteryModel.observe(viewLifecycleOwner) {
-            if (it.numero!=null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas !=null) {
+            if (it.numero != null && it.acumulado != null && it.valorEstimadoProximoConcurso != null && it.listaDezenas != null) {
                 setContestNumber(it.numero)
                 setAccumulated(
                     it.acumulado,
                     it.valorEstimadoProximoConcurso,
-                    it.listaRateioPremio.first().valorPremio
+                    it.listaRateioPremio.first()
                 )
                 setupDate(it.dataApuracao)
                 setupNextDate(it.dataProximoConcurso)
@@ -82,18 +82,26 @@ class LotofacilResultFragment : Fragment() {
                 contestNumberActual = it.numero
             }
         }
-        viewModel.getLotteryWithContestNumber()
+        viewModel.listaRateioPremio.observe(viewLifecycleOwner) {
+            lotofacilResultAdapter.updateList(it)
+        }
         binding.toolbarScreenResult.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
+        viewModel.listLastLotteryModel.observe(viewLifecycleOwner){
+            if (it.numero!=null) viewModel.lastContestNumberViewModel = it.numero
+        }
+        viewModel.getLotteryWithContestNumber()
+        viewModel.getLastLotteryData()
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
     }
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.contestNumberViewModel.isNotBlank()){
+        if (viewModel.contestNumberViewModel.isNotBlank()) {
             val contestNumberInEditText = viewModel.contestNumberViewModel.toInt()
-            if (contestNumberInEditText in 1000 .. contestNumberActual){
+            if (contestNumberInEditText in 1000..contestNumberActual) {
                 binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
             }
         }
@@ -103,44 +111,61 @@ class LotofacilResultFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
     private fun setupDate(dataApuracao: String) {
-        val dateformat = SimpleDateFormat(dataApuracao, Locale.getDefault())
-        val date = dateformat.parse(dataApuracao)
-        val dateformated = date?.let { dateformat.format(it) }
-        binding.textDateFragmentResult.text = dateformated
+        val dateFormat = SimpleDateFormat(dataApuracao, Locale.getDefault())
+        val date = dateFormat.parse(dataApuracao)
+        val dateFormated = date?.let { dateFormat.format(it) }
+        binding.textViewContestDate.text = dateFormated
     }
 
     private fun setupNextDate(dataProximoConcurso: String) {
         val dateformat = SimpleDateFormat(dataProximoConcurso, Locale.getDefault())
         val date = dateformat.parse(dataProximoConcurso)
         val dateformated = date?.let { dateformat.format(it) }
-        binding.textNextDateFragmentResult.text = dateformated
+        binding.textViewNextContestDate.text = dateformated
     }
 
     private fun setAccumulated(
         acumulado: Boolean,
         valorEstimadoProximoConcurso: Double,
-        valorDoPremio: Double
+        listaRateio: ResultFederalModel
     ) = with(binding) {
         val numberFormat = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
-        val valorPremioFormatado = numberFormat.format(valorDoPremio)
+        val valorPremioFormatado = numberFormat.format(listaRateio.valorPremio)
         val valorEstimadoFormatado = numberFormat.format(valorEstimadoProximoConcurso)
         if (acumulado) {
-            titleAccumulatedFragmentResult.text = "Acumulado"
-            textAccumulatedFragmentResult.text = valorEstimadoFormatado
+            textViewAccumulatedLotofacil.text = "ACUMULOU!"
+            textViewAccumulatedReward.text = valorEstimadoFormatado
         } else {
-            titleAccumulatedFragmentResult.text = "Premiação"
-            textAccumulatedFragmentResult.text = valorPremioFormatado
+            when (listaRateio.numeroDeGanhadores) {
+                1 -> {
+                    textViewAccumulatedLotofacil.text = "${listaRateio.numeroDeGanhadores} GANHADOR"
+                }
+                else -> {
+                    textViewAccumulatedLotofacil.text =
+                        "${listaRateio.numeroDeGanhadores} GANHADORES"
+                }
+            }
+
+            textViewAccumulatedReward.text = valorEstimadoFormatado
         }
     }
 
     private fun setupRecycler() {
         binding.gridlayoutFragmentScreenResult.apply {
             adapter = screenResultAdapter
-            layoutManager = GridLayoutManager(requireContext(), 6)
+            layoutManager = GridLayoutManager(requireContext(), 5)
+        }
+    }
+
+    private fun setupRecyclerDetailResult() {
+        binding.recyclerResult.apply {
+            adapter = lotofacilResultAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
@@ -169,7 +194,8 @@ class LotofacilResultFragment : Fragment() {
                         viewModel.getLotteryWithContestNumber()
                         binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
                         this.clearFocus()
-                        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        val inputMethodManager =
+                            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
                     } else {
                         viewModel.getLotteryData()
@@ -187,14 +213,71 @@ class LotofacilResultFragment : Fragment() {
 
     }
 
+    private fun setupButtonSearchContestNumber() {
+        binding.buttonPreviousContest.setOnClickListener {
+            val contestNumber =
+                binding.editTextContestNumberFragmentResult.text.toString().toInt()
+            val newContestNumber = contestNumber - 1
+            if (contestNumber in 1000..contestNumberActual && newContestNumber <= contestNumberActual) {
+                viewModel.contestNumberViewModel = newContestNumber.toString()
+                viewModel.getLotteryWithContestNumber()
+                binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
+                val inputMethodManager =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+                binding.editTextContestNumberFragmentResult.setText(contestNumber.toString())
+            } else {
+                viewModel.getLotteryData()
+                viewModel.listLotteryModel.observe(viewLifecycleOwner) {
+                    viewModel.contestNumberViewModel = it.numero.toString()
+                }
+                Toast.makeText(context, "Insira um número válido", Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+        binding.buttonNextContest.setOnClickListener {
+            val contestNumber =
+                binding.editTextContestNumberFragmentResult.text.toString().toInt()
+            val newContestNumber = contestNumber + 1
+            val t = viewModel.lastContestNumberViewModel
+            if (newContestNumber in 1000..viewModel.lastContestNumberViewModel && newContestNumber <= viewModel.lastContestNumberViewModel) {
+                viewModel.contestNumberViewModel = newContestNumber.toString()
+                viewModel.getLotteryWithContestNumber()
+
+                val inputMethodManager =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+                binding.editTextContestNumberFragmentResult.setText(contestNumber.toString())
+
+                when(newContestNumber==viewModel.lastContestNumberViewModel){
+                    true -> {
+                        binding.buttonRefreshFragmentMain.visibility = View.GONE
+                    }
+                    else -> {
+                        binding.buttonRefreshFragmentMain.visibility = View.VISIBLE
+                    }
+                }
+
+            } else {
+                viewModel.getLotteryData()
+                viewModel.listLotteryModel.observe(viewLifecycleOwner) {
+                    viewModel.contestNumberViewModel = it.numero.toString()
+                }
+                Toast.makeText(context, "Insira um número válido", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
     private fun setupAd() {
-        mAdView = binding.adViewResultFragment
+//        mAdView = binding.adViewResultFragment
         val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+//        mAdView.loadAd(adRequest)
     }
 
     private fun setupAdInterstitial() {
-        if (AD_COUNT>=2){
+        if (AD_COUNT >= 2) {
             val adRequest = AdRequest.Builder().build()
             InterstitialAd.load(
                 requireContext(),
@@ -210,7 +293,7 @@ class LotofacilResultFragment : Fragment() {
                         Log.d("Fragment", "Ad was loaded.")
                         mInterstitialAd = interstitialAd
                         mInterstitialAd?.show(requireActivity())
-                        AD_COUNT=0
+                        AD_COUNT = 0
                     }
                 }
             )

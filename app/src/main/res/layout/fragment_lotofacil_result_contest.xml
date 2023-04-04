@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_lotofacil_result_contest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_lotofacil_result_contest"
     android:background="#EDEDED">
 
     <ScrollView
@@ -60,182 +60,281 @@
                 android:id="@+id/button_refresh_fragment_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/imageview_megasena_screen_result"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:icon="@drawable/baseline_refresh_24"
+                android:text="Resultado Atual"
                 android:visibility="gone"
-                android:text="Resultado Atual"/>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_view_contest_screen_result"
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/status_bar_lotofacil"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_refresh_fragment_main">
-
-                <TextView
-                    android:id="@+id/title_contest_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:layout_marginTop="10dp"
-                    android:text="Concurso nº"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/edit_text_contest_number_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:maxLength="4"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:inputType="number"
-                    tools:text="2554"
-                    android:drawableStart="@drawable/baseline_search_24"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/white"/>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@id/card_view_date_screen_result"
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/status_bar_lotofacil"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_refresh_fragment_main">
-
-                <TextView
-                    android:id="@+id/title_data_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:layout_marginTop="10dp"
-                    android:text="Data"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/text_date_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="01/01/2023" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_view_next_date_screen_result"
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_margin="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/status_bar_lotofacil"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_date_screen_result">
-
-                <TextView
-                    android:id="@+id/title_next_date_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:layout_marginTop="15dp"
-                    android:text="Próximo concurso"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/text_next_date_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="01/01/2023" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@id/card_view_accumulated_screen_result"
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/status_bar_lotofacil"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_view_contest_screen_result">
-
-                <TextView
-                    android:id="@+id/title_accumulated_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|center"
-                    android:layout_marginTop="10dp"
-                    android:text="Resultado"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/text_accumulated_fragment_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:ellipsize="end"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    tools:text="R$ 230.000.000,00" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gridlayout_fragment_screen_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                app:icon="@drawable/baseline_refresh_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_accumulated_screen_result"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:itemCount="6"
-                tools:listitem="@layout/item_sorted_number" />
+                app:layout_constraintTop_toBottomOf="@+id/imageview_megasena_screen_result" />
 
-            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView_result_fragment"
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                ads:adSize="MEDIUM_RECTANGLE"
-                ads:adUnitId="@string/ad_banner_default"
-                ads:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_screen_result"
-                ads:layout_constraintEnd_toEndOf="parent"
-                ads:layout_constraintStart_toStartOf="parent">
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_refresh_fragment_main">
 
-            </com.google.android.gms.ads.AdView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_view_accumulated_lotofacil"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="ACUMULOU!"
+                        android:textAlignment="center"
+                        android:textColor="@color/status_bar_lotofacil"
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/gridlayout_fragment_screen_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_accumulated_lotofacil"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_sorted_number" />
+
+                    <EditText
+                        android:id="@+id/edit_text_contest_number_fragment_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableEnd="@drawable/baseline_search_24"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black"
+                        android:ellipsize="end"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/button_previous_contest"
+                        app:layout_constraintEnd_toStartOf="@+id/button_next_contest"
+                        app:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_screen_result"
+                        tools:text="2554" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_previous_contest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/edit_text_contest_number_fragment_result"
+                        app:layout_constraintBottom_toBottomOf="@+id/edit_text_contest_number_fragment_result"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/edit_text_contest_number_fragment_result"
+                        style="@style/ThemeOverlay.Material3.Button.TextButton"
+                        android:backgroundTint="@android:color/transparent"
+                        android:text="ANTERIOR"
+                        android:textColor="@color/status_bar_lotofacil"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_next_contest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/edit_text_contest_number_fragment_result"
+                        app:layout_constraintBottom_toBottomOf="@+id/edit_text_contest_number_fragment_result"
+                        app:layout_constraintStart_toEndOf="@+id/edit_text_contest_number_fragment_result"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        style="@style/ThemeOverlay.Material3.Button.TextButton"
+                        android:backgroundTint="@android:color/transparent"
+                        android:text="PRÓXIMO"
+                        android:textColor="@color/status_bar_lotofacil"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_view_title_contest_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Data do sorteio:"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_view_contest_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_contest_number_fragment_result" />
+
+                    <TextView
+                        android:id="@+id/text_view_contest_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="01/04/2023"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_title_contest_date"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_contest_number_fragment_result" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_view_table"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_title_contest_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="20dp"
+                        app:cardBackgroundColor="@color/status_bar_lotofacil"/>
+
+                    <TextView
+                        android:id="@+id/text_view_title_got_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acertos"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_table"
+                        app:layout_constraintEnd_toStartOf="@+id/text_view_title_winners"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="3dp"/>
+
+                    <TextView
+                        android:id="@+id/text_view_title_winners"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ganhadores"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_table"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_title_got_result"
+                        app:layout_constraintEnd_toStartOf="@+id/text_view_title_reward"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="3dp"/>
+
+                    <TextView
+                        android:id="@+id/text_view_title_reward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prêmio"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_table"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_table"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_title_winners"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:elevation="3dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/card_view_table"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginBottom="20dp"
+                        tools:listitem="@layout/item_list_lotofacil_result"
+                        tools:itemCount="5"
+                        />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_view_next_contest"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:layout_constraintTop_toBottomOf="@+id/recycler_result"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="20dp"
+                        app:cardBackgroundColor="@color/status_bar_lotofacil"/>
+
+                    <TextView
+                        android:id="@+id/text_view_title_next_contest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/card_view_next_contest"
+                        app:layout_constraintBottom_toBottomOf="@+id/card_view_next_contest"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:elevation="3dp"
+                        android:text="PRÓXIMO CONCURSO"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/title_text_view_title_next_contest_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Data Prevista:"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_view_next_contest_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/card_view_next_contest" />
+
+                    <TextView
+                        android:id="@+id/text_view_next_contest_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="01/04/2023"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title_text_view_title_next_contest_date"
+                        app:layout_constraintTop_toBottomOf="@+id/card_view_next_contest" />
+
+
+                    <TextView
+                        android:id="@+id/title_text_view_title_estimate_reward"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Prêmio estimado"
+                        android:textAlignment="center"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title_text_view_title_next_contest_date" />
+
+                    <TextView
+                        android:id="@+id/text_view_accumulated_reward"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintTop_toBottomOf="@+id/title_text_view_title_estimate_reward"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="R$ 4.500.000,00"
+                        android:textAlignment="center"
+                        android:textColor="@color/status_bar_lotofacil"
+                        android:textSize="35sp"
+                        android:textStyle="bold"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

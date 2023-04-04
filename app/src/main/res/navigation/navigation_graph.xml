@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="br.com.minhasortemegasena.ui.main.MainFragment"
+        android:name="br.com.minhasortemegasena.ui.games.megasena.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
     </fragment>
 
     <fragment
         android:id="@+id/screenResultFragment"
-        android:name="br.com.minhasortemegasena.ui.resultscreen.ScreenResultContestsFragment"
+        android:name="br.com.minhasortemegasena.ui.games.megasena.ScreenResultContestsFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_screen_result_contest">
     </fragment>
