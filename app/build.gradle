@@ -5,6 +5,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -53,7 +54,7 @@ android {
 
 dependencies {
 
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
+
     def fragment_version = "1.5.4"
     def navigationVersion = "2.5.3"
 
@@ -86,11 +87,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     //gson
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //room
+    implementation "androidx.room:room-ktx:2.4.1"
+    kapt "androidx.room:room-compiler:2.4.1"
 
 }

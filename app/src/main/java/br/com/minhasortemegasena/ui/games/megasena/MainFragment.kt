@@ -52,6 +52,7 @@ class MainFragment : Fragment() {
         setupAD()
         setupRecycler()
         setupAdInterstitial()
+        setupButtonGenerateNumbers()
         AD_COUNT++
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -59,26 +60,25 @@ class MainFragment : Fragment() {
     }
 
     private fun setupSlider() {
-
         binding.sliderFragmentMain.addOnChangeListener { slider, value, fromUser ->
             val sliderN = value.toInt()
             sliderValue = sliderN
         }
-
     }
 
     private fun setupRecycler() {
         binding.gridlayoutFragmentMain.apply {
-            adapter = mainAdapter.apply {
-                viewModel.submitList(mainAdapter)
-                binding.buttonFragmentMain.setOnClickListener {
-                    viewModel.randomNumber(sliderValue)
-                    viewModel.submitList(mainAdapter)
-                }
-            }
-            layoutManager = GridLayoutManager(requireContext(), 6).apply {
+            adapter = mainAdapter
+            viewModel.submitList(mainAdapter)
+            layoutManager = GridLayoutManager(requireContext(), 6)
+        }
+    }
 
-            }
+    private fun setupButtonGenerateNumbers() {
+        binding.buttonFragmentMain.setOnClickListener {
+            viewModel.generateRandomNumbers(sliderValue)
+            viewModel.submitList(mainAdapter)
+            viewModel.onSaveEvent()
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/home_list_games_caixa_fragment">
+    app:startDestination="@id/home_saved_games_fragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -84,6 +84,11 @@
         android:id="@+id/federal_palpite_fragment"
         android:name="br.com.minhasortemegasena.ui.games.federal.FederalPalpiteFragment"
         tools:layout="@layout/federal_palpite_fragment"
+        />
+    <fragment
+        android:id="@+id/home_saved_games_fragment"
+        android:name="br.com.minhasortemegasena.ui.savedgames.HomeSavedGamesFragment"
+        tools:layout="@layout/home_saved_games_fragment"
         />
 
 </navigation>

@@ -44,6 +44,7 @@ class LotofacilPalpiteFragment : Fragment() {
         setupAD()
         setupRecycler()
         setupAdInterstitial()
+        setupButtonGenerateNumbers()
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
         binding.toolbarLotofacilPalpite.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -82,14 +83,18 @@ class LotofacilPalpiteFragment : Fragment() {
         binding.gridlayoutFragmentPalpiteLotofacil.apply {
             adapter = mainAdapter.apply {
                 viewModel.submitList(mainAdapter)
-                binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
-                    viewModel.generateRandomNumbers(sliderValue)
-                    viewModel.submitList(mainAdapter)
-                }
             }
             layoutManager = GridLayoutManager(requireContext(), 6).apply {
 
             }
+        }
+    }
+
+    private fun setupButtonGenerateNumbers() {
+        binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
+            viewModel.generateRandomNumbers(sliderValue)
+            viewModel.submitList(mainAdapter)
+            viewModel.onSaveEvent()
         }
     }
 

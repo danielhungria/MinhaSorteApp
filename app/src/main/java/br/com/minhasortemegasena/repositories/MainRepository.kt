@@ -1,5 +1,7 @@
 package br.com.minhasortemegasena.repositories
 
+import br.com.minhasortemegasena.database.PalpiteDao
+import br.com.minhasortemegasena.model.PalpiteModel
 import br.com.minhasortemegasena.model.SupportModel
 import br.com.minhasortemegasena.retrofit.RetrofitService
 import com.google.android.gms.tasks.Task
@@ -9,7 +11,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(private val retrofitService: RetrofitService) {
+class MainRepository @Inject constructor(
+    private val retrofitService: RetrofitService,
+    private val palpiteDao: PalpiteDao
+) {
 
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -30,6 +35,19 @@ class MainRepository @Inject constructor(private val retrofitService: RetrofitSe
             .collection("support")
             .document(uuid)
             .set(supportModel)
+    }
+
+
+    //Database
+
+    suspend fun insert(palpiteModel: PalpiteModel){
+        palpiteDao.insert(palpiteModel)
+    }
+
+    fun getAllPalpites() = palpiteDao.getAllPalpites()
+
+    suspend fun delete(palpiteModel: PalpiteModel) {
+        palpiteDao.delete(palpiteModel)
     }
 
 }
