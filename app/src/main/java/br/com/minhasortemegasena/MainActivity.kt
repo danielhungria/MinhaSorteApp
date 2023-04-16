@@ -7,12 +7,16 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import br.com.minhasortemegasena.databinding.ActivityMainBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+
+    private lateinit var mAdView: AdView
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -21,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupAD()
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -42,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         )
         binding.navigationbarActivityMenu.isItemActiveIndicatorEnabled =
             destination.id in allowedDestinations
+    }
+
+    private fun setupAD() {
+        mAdView = binding.adViewMain
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
 }

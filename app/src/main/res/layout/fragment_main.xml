@@ -9,6 +9,7 @@
     tools:context="br.com.minhasortemegasena.ui.games.megasena.MainFragment">
 
     <ScrollView
+        android:id="@+id/scroll_view_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"

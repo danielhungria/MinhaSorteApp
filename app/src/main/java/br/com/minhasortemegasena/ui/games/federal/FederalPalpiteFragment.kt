@@ -1,10 +1,13 @@
 package br.com.minhasortemegasena.ui.games.federal
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,7 +29,6 @@ class FederalPalpiteFragment : Fragment() {
     private lateinit var mAdView: AdView
     private lateinit var mAdView2: AdView
     private var mInterstitialAd: InterstitialAd? = null
-
     private val viewModel: FederalPalpiteViewModel by viewModels()
 
 
@@ -34,6 +36,7 @@ class FederalPalpiteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAD()
         setupNumberGenerated()
+        setupButtonSavePalpite()
         AD_COUNT++
         activity?.window?.statusBarColor =
             ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
@@ -68,12 +71,37 @@ class FederalPalpiteFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.status_bar_federal)
     }
 
+    private fun setupButtonSavePalpite() {
+        binding.buttonSaveSortedNumber.setOnClickListener {
+            setupAdInterstitial()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Confirmar ação")
+            builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
+            builder.setPositiveButton("Sim") { _, _ ->
+                Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                binding.buttonSaveSortedNumber.postDelayed({
+                    AD_COUNT = 2
+                    setupAdInterstitial()
+                    viewModel.onSaveEvent()
+                }, 2000)
+
+            }
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
     private fun setupNumberGenerated() {
         binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
             viewModel.generateRandomNumbers()
             val generatedNumber = viewModel.randomNumberList.value?.first().toString()
             val formattedNumber = String.format("%04d", generatedNumber.toInt())
             binding.textViewFragmentPalpiteFederal.text = formattedNumber
+            binding.scrollViewFragment.post {
+                binding.scrollViewFragment.fullScroll(ScrollView.FOCUS_DOWN)
+            }
         }
     }
 

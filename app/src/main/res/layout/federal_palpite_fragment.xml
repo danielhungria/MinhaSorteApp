@@ -8,6 +8,7 @@
     android:background="@drawable/bg_fragment_main">
 
     <ScrollView
+        android:id="@+id/scroll_view_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +87,8 @@
                 ads:adUnitId="@string/ad_banner_default"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent"
-                ads:layout_constraintTop_toBottomOf="@+id/text_view_dezenas_fragment_palpite_lotofacil">
+                ads:layout_constraintTop_toBottomOf="@+id/text_view_dezenas_fragment_palpite_lotofacil"
+                android:visibility="gone">
 
             </com.google.android.gms.ads.AdView>
 
@@ -109,12 +111,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_palpite_lotofacil"
+                app:layout_constraintTop_toBottomOf="@+id/adView2_fragment"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="55sp"
-                android:text="99999"
+                tools:text="99999"
                 />
 
 
@@ -130,7 +132,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_palpite_federal">
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_palpite_lotofacil">
 
             </com.google.android.gms.ads.AdView>
 
@@ -146,6 +148,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adView_fragment_palpite_lotofacil" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/button_save_sorted_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#4A94E4"
+                android:text="SALVAR PALPITE"
+                android:textAlignment="center"
+                android:textColor="#FFF4F4F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:icon="@drawable/baseline_bookmark_24"
+                app:iconTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_palpite_federal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

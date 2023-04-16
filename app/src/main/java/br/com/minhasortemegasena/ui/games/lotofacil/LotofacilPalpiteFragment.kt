@@ -1,10 +1,13 @@
 package br.com.minhasortemegasena.ui.games.lotofacil
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,14 +29,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class LotofacilPalpiteFragment : Fragment() {
 
     private lateinit var binding: LotofacilPalpiteFragmentBinding
-
     private lateinit var mAdView: AdView
     private lateinit var mAdView2: AdView
-
     private val viewModel: LotofacilPalpiteViewModel by viewModels()
-
     private val mainAdapter = MainAdapter()
-
     private var sliderValue = 15
     private var mInterstitialAd: InterstitialAd? = null
 
@@ -45,6 +44,7 @@ class LotofacilPalpiteFragment : Fragment() {
         setupRecycler()
         setupAdInterstitial()
         setupButtonGenerateNumbers()
+        setupButtonSavePalpite()
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
         binding.toolbarLotofacilPalpite.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -71,6 +71,27 @@ class LotofacilPalpiteFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
     }
 
+    private fun setupButtonSavePalpite() {
+        binding.buttonSaveSortedNumber.setOnClickListener {
+            setupAdInterstitial()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Confirmar ação")
+            builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
+            builder.setPositiveButton("Sim") { _, _ ->
+                Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                binding.buttonSaveSortedNumber.postDelayed({
+                    AD_COUNT = 2
+                    setupAdInterstitial()
+                    viewModel.onSaveEvent()
+                }, 2000)
+            }
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
     private fun setupSlider() {
         binding.sliderFragmentPalpiteLotofacil.addOnChangeListener { slider, value, fromUser ->
             val sliderN = value.toInt()
@@ -94,7 +115,9 @@ class LotofacilPalpiteFragment : Fragment() {
         binding.buttonFragmentPalpiteLotofacil.setOnClickListener {
             viewModel.generateRandomNumbers(sliderValue)
             viewModel.submitList(mainAdapter)
-            viewModel.onSaveEvent()
+            binding.scrollViewFragment.post {
+                binding.scrollViewFragment.fullScroll(ScrollView.FOCUS_DOWN)
+            }
         }
     }
 
