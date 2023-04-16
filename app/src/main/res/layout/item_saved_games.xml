@@ -77,18 +77,36 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_fragment_palpite"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/button_check_result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_aposta_title"
+                tools:itemCount="6"
+                tools:listitem="@layout/item_sorted_number" />
+
+            <TextView
+                android:id="@+id/text_view_number_palpite"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_aposta_title"
                 app:layout_constraintBottom_toTopOf="@+id/button_check_result"
-                android:layout_marginVertical="10dp"
-                tools:listitem="@layout/item_sorted_number"
-                tools:itemCount="6"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:orientation="horizontal"
-                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_aposta_type"
+                android:layout_marginVertical="20dp"
+                android:text="99999"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:visibility="gone"
                 />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

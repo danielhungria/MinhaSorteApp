@@ -1,8 +1,5 @@
 package br.com.minhasortemegasena.adapter
 
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.minhasortemegasena.R
 import br.com.minhasortemegasena.databinding.ItemSavedGamesBinding
 import br.com.minhasortemegasena.model.PalpiteModel
 
@@ -20,6 +16,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
     private var fullList = mutableListOf<PalpiteModel>()
     private var listNumbersResultMegasena: List<Int> = emptyList()
     private var listNumbersResultLotofacil: List<Int> = emptyList()
+    private var listNumbersResultFederal: List<Int> = emptyList()
 //    private var listNumbersResultFederal: List<Int> = emptyList()
 
     fun updateList(listLotteryModel: List<PalpiteModel>) {
@@ -37,6 +34,11 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
         notifyDataSetChanged()
     }
 
+    fun updateNumbersResultFederal(numbersResultFederal: List<Int>) {
+        listNumbersResultFederal = numbersResultFederal
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(
         private val binding: ItemSavedGamesBinding,
         private val onClickDelete: (PalpiteModel) -> Unit
@@ -44,7 +46,12 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
 
         private var currentItem: PalpiteModel? = null
 
-        fun bind(item: PalpiteModel, listNumbersResult: List<Int>, listNumbersResultLotofacil: List<Int>) {
+        fun bind(
+            item: PalpiteModel,
+            listNumbersResult: List<Int>,
+            listNumbersResultLotofacil: List<Int>,
+            listNumbersResultFederal: List<Int>
+        ) {
             currentItem = item
             val numberCard = adapterPosition + 1
             val listNumbersPalpitesAdapter = ListNumbersPalpitesAdapter()
@@ -52,8 +59,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             binding.textViewApostaNumber.text = "#$numberCard"
             setupRecyclerChild(listNumbersPalpitesAdapter)
             listNumbersPalpitesAdapter.updateList(currentItem?.palpiteNumbers ?: emptyList())
-            setupButtonCheckResult(listNumbersResult,listNumbersResultLotofacil)
-
+            setupButtonCheckResult(listNumbersResult,listNumbersResultLotofacil,listNumbersResultFederal)
 
             binding.buttonDeletePalpite.setOnClickListener{
                 currentItem?.let {
@@ -70,7 +76,24 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             }
         }
 
-        private fun setupButtonCheckResult(listNumbersResult: List<Int>, listNumbersResultLotofacil: List<Int>) {
+        private fun setupButtonCheckResult(
+            listNumbersResult: List<Int>,
+            listNumbersResultLotofacil: List<Int>,
+            listNumbersResultFederal: List<Int>
+        ) {
+
+            if (currentItem?.typeGame == "federal"){
+                binding.recyclerFragmentPalpite.visibility = View.GONE
+                binding.textViewNumberPalpite.visibility = View.VISIBLE
+                binding.textViewNumberPalpite.text = currentItem?.palpiteNumbers?.first().toString()
+            }else if (currentItem?.typeGame == "megasena"){
+                binding.recyclerFragmentPalpite.visibility = View.VISIBLE
+                binding.textViewNumberPalpite.visibility = View.GONE
+            }else if(currentItem?.typeGame == "lotofacil"){
+                binding.recyclerFragmentPalpite.visibility = View.VISIBLE
+                binding.textViewNumberPalpite.visibility = View.GONE
+            }
+
             binding.buttonCheckResult.setOnClickListener {
                 var countMegasena = 0
                 var countLotofacil = 0
@@ -120,6 +143,32 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
                             binding.textViewResultChecked.text = "VOCÊ É MUITO SORTUDO(A), $countLotofacil ACERTOS!!"
                         }
                     }
+                }else if(currentItem?.typeGame == "federal"){
+                    binding.recyclerFragmentPalpite.visibility = View.GONE
+                    binding.textViewNumberPalpite.visibility = View.VISIBLE
+                    binding.textViewResultChecked.visibility = View.VISIBLE
+                    currentItem?.palpiteNumbers?.forEach { number ->
+                        val index = listNumbersResultFederal.indexOf(number)
+                        if (index != -1) {
+                            // número encontrado em listNumbersResultFederal
+                            binding.textViewResultChecked.text = "Parabéns!! Você acertou o número completo no ${index+1}º prêmio"
+                        } else {
+                            // verificar os três e quatro últimos dígitos
+                            val lastThreeDigits = number % 1000
+                            val lastFourDigits = number % 10000
+                            val indexThreeDigits = listNumbersResultFederal.indexOfFirst { it % 1000 == lastThreeDigits }
+                            val indexFourDigits = listNumbersResultFederal.indexOfFirst { it % 10000 == lastFourDigits }
+                            if (indexThreeDigits != -1) {
+                                // três últimos dígitos encontrados em listNumbersResultFederal
+                                binding.textViewResultChecked.text = "Você acertou uma centena no ${indexThreeDigits+1}º prêmio"
+                            } else if (indexFourDigits != -1) {
+                                // quatro últimos dígitos encontrados em listNumbersResultFederal
+                                binding.textViewResultChecked.text = "Você acertou um milhar no ${indexThreeDigits+1}º prêmio"
+                            }else{
+                                binding.textViewResultChecked.text = "Não foi dessa vez!"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -141,7 +190,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.clear()
-        holder.bind(currentItem, listNumbersResultMegasena, listNumbersResultLotofacil)
+        holder.bind(currentItem, listNumbersResultMegasena, listNumbersResultLotofacil, listNumbersResultFederal)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<PalpiteModel>() {
