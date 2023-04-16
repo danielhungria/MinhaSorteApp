@@ -78,7 +78,7 @@ class MainFragment : Fragment() {
         binding.buttonFragmentMain.setOnClickListener {
             viewModel.generateRandomNumbers(sliderValue)
             viewModel.submitList(mainAdapter)
-            viewModel.onSaveEvent()
+//            viewModel.onSaveEvent()
         }
     }
 

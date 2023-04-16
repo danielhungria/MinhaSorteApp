@@ -90,7 +90,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_view_dezenas_fragment_main"
                 app:thumbColor="#4A94E4"
                 app:trackColor="#9BC5F3"
-
                 />
 
             <com.google.android.gms.ads.AdView
@@ -105,7 +104,8 @@
                 ads:adUnitId="@string/ad_banner_default"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent"
-                ads:layout_constraintTop_toBottomOf="@+id/slider_fragment_main">
+                ads:layout_constraintTop_toBottomOf="@+id/slider_fragment_main"
+                android:visibility="gone">
 
             </com.google.android.gms.ads.AdView>
 
@@ -127,11 +127,29 @@
                 android:id="@+id/gridlayout_fragment_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_main"
+                app:layout_constraintTop_toBottomOf="@+id/adView2_main_fragment"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/item_sorted_number"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 android:orientation="horizontal"
+                />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/button_save_sorted_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#4A94E4"
+                android:text="SALVAR PALPITE"
+                android:textAlignment="center"
+                android:textColor="#FFF4F4F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:icon="@drawable/baseline_bookmark_24"
+                app:iconTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_main"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
                 />
 
 
@@ -147,7 +165,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gridlayout_fragment_main">
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_fragment_main"
+                android:visibility="visible">
 
             </com.google.android.gms.ads.AdView>
 
