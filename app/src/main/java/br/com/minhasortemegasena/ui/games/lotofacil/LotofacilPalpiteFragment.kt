@@ -50,7 +50,8 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
         setupAdInterstitial()
         setupButtonGenerateNumbers()
         setupButtonSavePalpite()
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_lotofacil)
         binding.toolbarLotofacilPalpite.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -67,7 +68,8 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
 
     override fun onPause() {
         super.onPause()
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.status_bar_default)
+        activity?.window?.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.status_bar_default)
     }
 
     override fun onResume() {
@@ -77,14 +79,19 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
     }
 
     private fun setupButtonSavePalpite() {
-        if (!viewModel.randomNumberList.value.isNullOrEmpty()) {
-            binding.buttonSaveSortedNumber.setOnClickListener {
+
+        binding.buttonSaveSortedNumber.setOnClickListener {
+            if (!viewModel.randomNumberList.value.isNullOrEmpty()) {
                 setupAdInterstitial()
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Confirmar ação")
                 builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
                 builder.setPositiveButton("Sim") { _, _ ->
-                    Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Palpite salvo com sucesso!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     binding.buttonSaveSortedNumber.postDelayed({
                         setupRewardedAd()
                         viewModel.onSaveEvent()
@@ -94,9 +101,13 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
                     dialog.dismiss()
                 }
                 builder.show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Sorteie um número antes de salvar o palpite",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-        } else {
-            Toast.makeText(requireContext(), "Sorteie um número antes de salvar o palpite",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -168,7 +179,7 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
     }
 
     private fun setupAdInterstitial() {
-        if (AD_COUNT >=2){
+        if (AD_COUNT >= 2) {
             val adRequest = AdRequest.Builder().build()
             InterstitialAd.load(
                 requireContext(),
@@ -184,7 +195,7 @@ class LotofacilPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
                         Log.d("Fragment", "Ad was loaded.")
                         mInterstitialAd = interstitialAd
                         mInterstitialAd?.show(requireActivity())
-                        AD_COUNT=0
+                        AD_COUNT = 0
                     }
                 }
             )
