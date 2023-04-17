@@ -18,7 +18,8 @@ class SupportViewModel @Inject constructor(
     fun uploadSupport(
         title: String,
         text: String,
-        context: Context?
+        context: Context?,
+        callback: ((Boolean) -> Unit)?
     ) {
         val uuid = UUID.randomUUID().toString()
         val saveSupport = SupportModel(
@@ -37,6 +38,7 @@ class SupportViewModel @Inject constructor(
                             Toast.LENGTH_LONG
                         ).show()
                     }
+                    callback?.invoke(true)
                 } else {
                     context?.let {
                         Toast.makeText(
@@ -51,6 +53,7 @@ class SupportViewModel @Inject constructor(
                     Toast.makeText(context, "Serviço indisponível no momento", Toast.LENGTH_LONG)
                         .show()
                 }
+                callback?.invoke(false)
             }
 
         }

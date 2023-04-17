@@ -1,10 +1,12 @@
 package br.com.minhasortemegasena
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import br.com.minhasortemegasena.databinding.SupportFragmentBinding
@@ -38,6 +40,7 @@ class SupportFragment: Fragment() {
         setupBannerAd()
         setupAdInterstitial()
         AD_COUNT++
+//        binding.buttonSendSupportFragment.text = "Enviar"
         binding.buttonSendSupportFragment.setOnClickListener {
             val title = binding.textInputEditTitleSupportFragment.text.toString()
             val text = binding.textInputEditTextSupportFragment.text.toString()
@@ -45,7 +48,17 @@ class SupportFragment: Fragment() {
                 title = title,
                 text = text,
                 context = context
-            )
+            ) { success ->
+                if (success) {
+                    binding.buttonSendSupportFragment.text = "Enviado!"
+                    binding.textInputEditTitleSupportFragment.text?.clear()
+                    binding.textInputEditTextSupportFragment.text?.clear()
+                    val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
+                } else {
+                    binding.buttonSendSupportFragment.text = "Serviço Indisponível"
+                }
+            }
         }
     }
 

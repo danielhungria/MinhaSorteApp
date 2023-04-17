@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         val allowedDestinations = listOf(
             R.id.home_list_games_caixa_fragment,
             R.id.home_list_results,
-            R.id.support_fragment
+            R.id.support_fragment,
+            R.id.home_saved_games_fragment
         )
         binding.navigationbarActivityMenu.isItemActiveIndicatorEnabled =
             destination.id in allowedDestinations

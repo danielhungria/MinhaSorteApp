@@ -72,23 +72,27 @@ class LotofacilPalpiteFragment : Fragment() {
     }
 
     private fun setupButtonSavePalpite() {
-        binding.buttonSaveSortedNumber.setOnClickListener {
-            setupAdInterstitial()
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Confirmar ação")
-            builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
-            builder.setPositiveButton("Sim") { _, _ ->
-                Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
-                binding.buttonSaveSortedNumber.postDelayed({
-                    AD_COUNT = 2
-                    setupAdInterstitial()
-                    viewModel.onSaveEvent()
-                }, 2000)
+        if (!viewModel.randomNumberList.value.isNullOrEmpty()) {
+            binding.buttonSaveSortedNumber.setOnClickListener {
+                setupAdInterstitial()
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Confirmar ação")
+                builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
+                builder.setPositiveButton("Sim") { _, _ ->
+                    Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                    binding.buttonSaveSortedNumber.postDelayed({
+                        AD_COUNT = 2
+                        setupAdInterstitial()
+                        viewModel.onSaveEvent()
+                    }, 2000)
+                }
+                builder.setNegativeButton("Cancelar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.show()
             }
-            builder.setNegativeButton("Cancelar") { dialog, _ ->
-                dialog.dismiss()
-            }
-            builder.show()
+        } else {
+            Toast.makeText(requireContext(), "Sorteie um número antes de salvar o palpite",Toast.LENGTH_LONG).show()
         }
     }
 

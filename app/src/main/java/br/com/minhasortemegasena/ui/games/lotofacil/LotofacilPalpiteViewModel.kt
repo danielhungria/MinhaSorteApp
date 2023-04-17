@@ -17,7 +17,7 @@ import kotlin.random.nextInt
 class LotofacilPalpiteViewModel @Inject constructor(private val mainRepository: MainRepository): ViewModel() {
 
     private val _randomNumberList = MutableLiveData<List<Int>>()
-    private val randomNumberList: LiveData<List<Int>> = _randomNumberList
+    val randomNumberList: LiveData<List<Int>> = _randomNumberList
     var adLoad: Int = 0
 
 
