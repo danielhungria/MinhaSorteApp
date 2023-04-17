@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">MinhaSorte</string>
-    <string name="ad_banner_default">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_banner_default">ca-app-pub-1398509773631594/6129017436</string>
 <!--    default ca-app-pub-1398509773631594/6129017436-->
 <!--    test ca-app-pub-3940256099942544/6300978111-->
 
-    <string name="ad_view_interstitial_default">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_view_interstitial_default">ca-app-pub-1398509773631594/9102859623</string>
 <!--    default ca-app-pub-1398509773631594/9102859623-->
 <!--    test ca-app-pub-3940256099942544/1033173712-->
+
+    <string name="ad_view_rewarded">ca-app-pub-1398509773631594/3219520048</string>
+    <!--    default ca-app-pub-1398509773631594/3219520048-->
+    <!--    test ca-app-pub-3940256099942544/5224354917-->
+
 
 
 </resources>
