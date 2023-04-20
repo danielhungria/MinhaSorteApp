@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="#EDEDED"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +167,7 @@
                         android:text="Data do sorteio:"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toStartOf="@+id/text_view_contest_date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_text_contest_number_fragment_result" />
@@ -179,6 +181,7 @@
                         android:text="01/04/2023"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_view_title_contest_date"
                         app:layout_constraintTop_toBottomOf="@+id/edit_text_contest_number_fragment_result" />
@@ -191,7 +194,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="@color/status_bar_lotofacil"/>
+                        app:cardBackgroundColor="@color/status_bar_lotofacil"
+                        style="@style/Widget.Material3.CardView.Elevated"
+                        />
 
                     <TextView
                         android:id="@+id/text_view_title_got_result"
@@ -262,7 +267,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="@color/status_bar_lotofacil"/>
+                        app:cardBackgroundColor="@color/status_bar_lotofacil"
+                        style="@style/Widget.Material3.CardView.Elevated"
+                        />
 
                     <TextView
                         android:id="@+id/text_view_title_next_contest"
@@ -287,6 +294,7 @@
                         android:text="Data Prevista:"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toStartOf="@+id/text_view_next_contest_date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/card_view_next_contest" />
@@ -300,6 +308,7 @@
                         android:text="01/04/2023"
                         android:textAlignment="center"
                         android:textSize="18sp"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/title_text_view_title_next_contest_date"
                         app:layout_constraintTop_toBottomOf="@+id/card_view_next_contest" />
@@ -314,6 +323,7 @@
                         android:text="Prêmio estimado"
                         android:textAlignment="center"
                         android:textSize="13sp"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/title_text_view_title_next_contest_date" />

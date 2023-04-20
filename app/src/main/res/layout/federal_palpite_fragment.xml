@@ -116,6 +116,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="55sp"
+                android:textColor="@color/black"
                 tools:text="99999"
                 />
 
