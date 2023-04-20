@@ -47,19 +47,33 @@
                 </com.google.android.material.appbar.AppBarLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <ImageView
+                android:id="@+id/image_alert_no_items"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_home"
+                android:background="@drawable/baseline_warning_amber_24"
+                android:backgroundTint="#CACACA"
+                android:visibility="gone"
+                />
+
             <TextView
                 android:id="@+id/text_view_no_items"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:text="Não há palpites salvos no momento"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:textColor="#CACACA"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_home"
+                app:layout_constraintTop_toBottomOf="@+id/image_alert_no_items"
                 android:visibility="gone"/>
 
 

@@ -50,6 +50,10 @@ class HomeSavedGamesViewModel @Inject constructor(
         }
     }
 
+    fun checkList(): Boolean {
+        return _palpiteModel.value.isNullOrEmpty()
+    }
+
 
     fun getLotteryDataMegasena() {
         val request = mainRepository.getLotteryData("megasena")

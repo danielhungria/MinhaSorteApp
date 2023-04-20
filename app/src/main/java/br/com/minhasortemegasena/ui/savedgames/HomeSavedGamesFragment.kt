@@ -56,9 +56,22 @@ class HomeSavedGamesFragment: Fragment() {
         }
         viewModel.palpiteModel.observe(viewLifecycleOwner){
             listPalpitesAdapter.updateList(it)
+            checkListRecyclerAndSetupTextNoItems()
         }
         viewModel.fetchItemList()
 
+        checkListRecyclerAndSetupTextNoItems()
+
+    }
+
+    private fun checkListRecyclerAndSetupTextNoItems() {
+        if (viewModel.checkList()) {
+            binding.imageAlertNoItems.visibility = View.VISIBLE
+            binding.textViewNoItems.visibility = View.VISIBLE
+        } else {
+            binding.imageAlertNoItems.visibility = View.GONE
+            binding.textViewNoItems.visibility = View.GONE
+        }
     }
 
     override fun onCreateView(

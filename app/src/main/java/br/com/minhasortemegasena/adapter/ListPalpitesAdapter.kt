@@ -66,7 +66,6 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
                     onClickDelete(it)
                 }
             }
-
         }
 
         private fun setupRecyclerChild(listNumbersPalpitesAdapter: ListNumbersPalpitesAdapter) {

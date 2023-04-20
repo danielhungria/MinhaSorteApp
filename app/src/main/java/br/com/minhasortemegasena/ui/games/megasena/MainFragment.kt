@@ -52,6 +52,7 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRewardedAd()
         setupSlider()
         setupAD()
         setupRecycler()
@@ -73,9 +74,10 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
                 builder.setMessage("Para salvar o palpite as vezes é necessário exibir um anúncio, deseja continuar?")
                 builder.setPositiveButton("Sim") { _, _ ->
                     Toast.makeText(requireContext(), "Salvo com sucesso! Veja o seu palpite na aba 'Palpites Salvos' abaixo",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_LONG).show()
                     binding.buttonSaveSortedNumber.postDelayed({
                         setupRewardedAd()
+                        showRewardAd()
                         viewModel.onSaveEvent()
 
                     }, 2000)
@@ -107,7 +109,9 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
                     rewardedAd = ad
                 }
             })
+    }
 
+    private fun showRewardAd() {
         rewardedAd?.let { ad ->
             if (isAdded) {
                 ad.show(requireActivity(), OnUserEarnedRewardListener { rewardItem ->
@@ -117,7 +121,10 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
                     Log.d(TAG, "User earned the reward. $rewardAmount, $rewardType")
                 })
             } else {
-                Log.d(TAG, "The rewarded ad wasn't shown because the Fragment wasn't attached to an activity.")
+                Log.d(
+                    TAG,
+                    "The rewarded ad wasn't shown because the Fragment wasn't attached to an activity."
+                )
             }
         } ?: run {
             Log.d(TAG, "The rewarded ad wasn't ready yet.")
