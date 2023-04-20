@@ -88,7 +88,7 @@ class FederalPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
                 builder.setPositiveButton("Sim") { _, _ ->
                     Toast.makeText(
                         requireContext(),
-                        "Palpite salvo com sucesso!",
+                        "Salvo com sucesso! Veja o seu palpite na aba 'Palpites Salvos' abaixo",
                         Toast.LENGTH_SHORT
                     ).show()
                     binding.buttonSaveSortedNumber.postDelayed({
@@ -130,12 +130,16 @@ class FederalPalpiteFragment : Fragment(), OnUserEarnedRewardListener {
             })
 
         rewardedAd?.let { ad ->
-            ad.show(requireActivity(), OnUserEarnedRewardListener { rewardItem ->
-                // Handle the reward.
-                val rewardAmount = rewardItem.amount
-                val rewardType = rewardItem.type
-                Log.d(TAG, "User earned the reward. $rewardAmount, $rewardType")
-            })
+            if (isAdded) {
+                ad.show(requireActivity(), OnUserEarnedRewardListener { rewardItem ->
+                    // Handle the reward.
+                    val rewardAmount = rewardItem.amount
+                    val rewardType = rewardItem.type
+                    Log.d(TAG, "User earned the reward. $rewardAmount, $rewardType")
+                })
+            } else {
+                Log.d(TAG, "The rewarded ad wasn't shown because the Fragment wasn't attached to an activity.")
+            }
         } ?: run {
             Log.d(TAG, "The rewarded ad wasn't ready yet.")
         }

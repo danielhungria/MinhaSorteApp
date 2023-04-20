@@ -70,9 +70,10 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
                 setupAdInterstitial()
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Confirmar ação")
-                builder.setMessage("Para salvar o palpite é necessário exibir um anúncio, deseja continuar?")
+                builder.setMessage("Para salvar o palpite as vezes é necessário exibir um anúncio, deseja continuar?")
                 builder.setPositiveButton("Sim") { _, _ ->
-                    Toast.makeText(requireContext(), "Palpite salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Salvo com sucesso! Veja o seu palpite na aba 'Palpites Salvos' abaixo",
+                        Toast.LENGTH_SHORT).show()
                     binding.buttonSaveSortedNumber.postDelayed({
                         setupRewardedAd()
                         viewModel.onSaveEvent()
@@ -108,12 +109,16 @@ class MainFragment : Fragment(), OnUserEarnedRewardListener {
             })
 
         rewardedAd?.let { ad ->
-            ad.show(requireActivity(), OnUserEarnedRewardListener { rewardItem ->
-                // Handle the reward.
-                val rewardAmount = rewardItem.amount
-                val rewardType = rewardItem.type
-                Log.d(TAG, "User earned the reward. $rewardAmount, $rewardType")
-            })
+            if (isAdded) {
+                ad.show(requireActivity(), OnUserEarnedRewardListener { rewardItem ->
+                    // Handle the reward.
+                    val rewardAmount = rewardItem.amount
+                    val rewardType = rewardItem.type
+                    Log.d(TAG, "User earned the reward. $rewardAmount, $rewardType")
+                })
+            } else {
+                Log.d(TAG, "The rewarded ad wasn't shown because the Fragment wasn't attached to an activity.")
+            }
         } ?: run {
             Log.d(TAG, "The rewarded ad wasn't ready yet.")
         }

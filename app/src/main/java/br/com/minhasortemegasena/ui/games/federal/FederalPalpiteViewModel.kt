@@ -28,7 +28,6 @@ class FederalPalpiteViewModel @Inject constructor(private val mainRepository: Ma
         val list = mutableListOf<Int>()
             val random = Random(System.currentTimeMillis())
             val randomNumber = random.nextInt(99999) + 1
-//            val randomNumber = (1..9999).random()
             if (randomNumber !in list) {
                 list.add(randomNumber)
             }
