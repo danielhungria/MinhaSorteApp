@@ -40,6 +40,9 @@ class HomeFragment: Fragment() {
         binding.cardViewItemFederal.setOnClickListener {
             findNavController().navigate(R.id.action_home_list_games_to_federal_palpites_fragment)
         }
+        binding.cardViewItemQuina.setOnClickListener {
+            findNavController().navigate(R.id.action_home_list_games_to_quina_palpites_fragment)
+        }
         setupAD()
     }
 

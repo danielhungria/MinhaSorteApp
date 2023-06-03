@@ -35,6 +35,11 @@
         <item name="android:statusBarColor" >#2356A0</item>
     </style>
 
+    <style name="Widget.Material3.Toolbar.Quina" parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar.Quina</item>
+        <item name="android:statusBarColor" >#403486</item>
+    </style>
+
     <style name="ThemeOverlay.App.Toolbar.Lotofacil" parent="">
         <item name="colorSurface">#A7348B</item>
         <item name="colorOnSurface">#A7348B</item>
@@ -43,6 +48,11 @@
     <style name="ThemeOverlay.App.Toolbar.Federal" parent="">
         <item name="colorSurface">#2356A0</item>
         <item name="colorOnSurface">#2356A0</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar.Quina" parent="">
+        <item name="colorSurface">#403486</item>
+        <item name="colorOnSurface">#403486</item>
     </style>
 
 </resources>

@@ -36,6 +36,9 @@ class ResultListFragment: Fragment() {
         binding.cardViewItemLotofacil.setOnClickListener {
             findNavController().navigate(R.id.action_list_results_to_lotofacil_results_fragment)
         }
+        binding.cardViewItemQuina.setOnClickListener {
+            findNavController().navigate(R.id.action_list_results_to_quina_results_fragment)
+        }
         binding.cardViewItemFederal.setOnClickListener {
             findNavController().navigate(R.id.action_list_results_to_federal_results_fragment)
         }

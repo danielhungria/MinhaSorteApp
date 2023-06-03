@@ -44,6 +44,10 @@
             android:id="@+id/action_home_list_games_to_federal_palpites_fragment"
             app:destination="@id/federal_palpite_fragment"
             />
+        <action
+            android:id="@+id/action_home_list_games_to_quina_palpites_fragment"
+            app:destination="@id/quina_palpite_fragment"
+            />
     </fragment>
 
     <fragment
@@ -63,6 +67,10 @@
             android:id="@+id/action_list_results_to_federal_results_fragment"
             app:destination="@+id/fragment_federal_result_contest"
             />
+        <action
+            android:id="@+id/action_list_results_to_quina_results_fragment"
+            app:destination="@+id/fragment_quina_result_contest"
+            />
     </fragment>
 
     <fragment
@@ -81,9 +89,19 @@
         tools:layout="@layout/fragment_federal_result_contest"
         />
     <fragment
+        android:id="@+id/fragment_quina_result_contest"
+        android:name="br.com.minhasortemegasena.ui.games.quina.QuinaResultFragment"
+        tools:layout="@layout/fragment_quina_result_contest"
+        />
+    <fragment
         android:id="@+id/federal_palpite_fragment"
         android:name="br.com.minhasortemegasena.ui.games.federal.FederalPalpiteFragment"
         tools:layout="@layout/federal_palpite_fragment"
+        />
+    <fragment
+        android:id="@+id/quina_palpite_fragment"
+        android:name="br.com.minhasortemegasena.ui.games.quina.QuinaPalpiteFragment"
+        tools:layout="@layout/quina_palpite_fragment"
         />
     <fragment
         android:id="@+id/home_saved_games_fragment"
