@@ -16,9 +16,9 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
     private var fullList = mutableListOf<PalpiteModel>()
     private var listNumbersResultMegasena: List<Int> = emptyList()
     private var listNumbersResultLotofacil: List<Int> = emptyList()
+    private var listNumbersResultLotomania: List<Int> = emptyList()
     private var listNumbersResultQuina: List<Int> = emptyList()
     private var listNumbersResultFederal: List<Int> = emptyList()
-//    private var listNumbersResultFederal: List<Int> = emptyList()
 
     fun updateList(listLotteryModel: List<PalpiteModel>) {
         fullList = listLotteryModel.toMutableList()
@@ -32,6 +32,11 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
 
     fun updateNumbersResultLotofacil(numbersResultLotofacil: List<Int>) {
         listNumbersResultLotofacil = numbersResultLotofacil
+        notifyDataSetChanged()
+    }
+
+    fun updateNumbersResultLotomania(numbersResultLotomania: List<Int>) {
+        listNumbersResultLotomania = numbersResultLotomania
         notifyDataSetChanged()
     }
 
@@ -57,7 +62,8 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             listNumbersResult: List<Int>,
             listNumbersResultLotofacil: List<Int>,
             listNumbersResultFederal: List<Int>,
-            listNumbersResultQuina: List<Int>
+            listNumbersResultQuina: List<Int>,
+            listNumbersResultLotomania: List<Int>,
         ) {
             currentItem = item
             val numberCard = adapterPosition + 1
@@ -66,7 +72,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             binding.textViewApostaNumber.text = "#$numberCard"
             setupRecyclerChild(listNumbersPalpitesAdapter)
             listNumbersPalpitesAdapter.updateList(currentItem?.palpiteNumbers ?: emptyList())
-            setupButtonCheckResult(listNumbersResult,listNumbersResultLotofacil,listNumbersResultFederal, listNumbersResultQuina)
+            setupButtonCheckResult(listNumbersResult,listNumbersResultLotofacil,listNumbersResultFederal, listNumbersResultQuina, listNumbersResultLotomania)
 
             binding.buttonDeletePalpite.setOnClickListener{
                 currentItem?.let {
@@ -86,7 +92,8 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             listNumbersResult: List<Int>,
             listNumbersResultLotofacil: List<Int>,
             listNumbersResultFederal: List<Int>,
-            listNumbersResultQuina: List<Int>
+            listNumbersResultQuina: List<Int>,
+            listNumbersResultLotomania: List<Int>,
         ) {
 
             if (currentItem?.typeGame == "federal"){
@@ -99,6 +106,9 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             }else if(currentItem?.typeGame == "lotofacil"){
                 binding.recyclerFragmentPalpite.visibility = View.VISIBLE
                 binding.textViewNumberPalpite.visibility = View.GONE
+            }else if(currentItem?.typeGame == "lotomania"){
+                binding.recyclerFragmentPalpite.visibility = View.VISIBLE
+                binding.textViewNumberPalpite.visibility = View.GONE
             }else if (currentItem?.typeGame == "quina"){
                 binding.recyclerFragmentPalpite.visibility = View.VISIBLE
                 binding.textViewNumberPalpite.visibility = View.GONE
@@ -107,6 +117,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
             binding.buttonCheckResult.setOnClickListener {
                 var countMegasena = 0
                 var countLotofacil = 0
+                var countLotomania = 0
                 var countQuina = 0
 
                 if (currentItem?.typeGame == "megasena"){
@@ -152,6 +163,27 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
                         }
                         else -> {
                             binding.textViewResultChecked.text = "VOCÊ É MUITO SORTUDO(A), $countLotofacil ACERTOS!!"
+                        }
+                    }
+                } else if(currentItem?.typeGame == "lotomania"){
+                    currentItem?.palpiteNumbers?.forEach { number ->
+                        if (number in listNumbersResultLotofacil) {
+                            countLotomania++
+                        }
+                    }
+                    binding.textViewResultChecked.visibility = View.VISIBLE
+                    when (countLotomania) {
+                        0 -> {
+                            binding.textViewResultChecked.text = "VOCÊ É MUITO SORTUDO(A), $countLotomania ACERTO!!"
+                        }
+                        in 1..14 -> {
+                            binding.textViewResultChecked.text = "$countLotomania ACERTOS!"
+                        }
+                        in 15..19 -> {
+                            binding.textViewResultChecked.text = "Parabéns, $countLotomania ACERTOS!!"
+                        }
+                        else -> {
+                            binding.textViewResultChecked.text = "VOCÊ É MUITO SORTUDO(A), $countLotomania ACERTOS!!"
                         }
                     }
                 }else if(currentItem?.typeGame == "quina"){
@@ -222,7 +254,7 @@ class ListPalpitesAdapter(val onClickDelete:(PalpiteModel) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.clear()
-        holder.bind(currentItem, listNumbersResultMegasena, listNumbersResultLotofacil, listNumbersResultFederal, listNumbersResultQuina)
+        holder.bind(currentItem, listNumbersResultMegasena, listNumbersResultLotofacil, listNumbersResultFederal, listNumbersResultQuina, listNumbersResultLotomania)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<PalpiteModel>() {

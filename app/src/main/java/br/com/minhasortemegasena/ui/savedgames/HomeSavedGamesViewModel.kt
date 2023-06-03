@@ -34,6 +34,10 @@ class HomeSavedGamesViewModel @Inject constructor(
     val listLotteryModelLotofacil: LiveData<LotteryModel>
         get() = _listLotteryModelLotofacil
 
+    private val _listLotteryModelLotomania = MutableLiveData<LotteryModel>()
+    val listLotteryModelLotomania: LiveData<LotteryModel>
+        get() = _listLotteryModelLotomania
+
     private val _listLotteryModelQuina = MutableLiveData<LotteryModel>()
     val listLotteryModelQuina: LiveData<LotteryModel>
         get() = _listLotteryModelQuina
@@ -76,6 +80,18 @@ class HomeSavedGamesViewModel @Inject constructor(
         request.enqueue(object : Callback<LotteryModel> {
             override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
                 _listLotteryModelLotofacil.postValue(response.body())
+            }
+            override fun onFailure(call: Call<LotteryModel>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+
+    fun getLotteryDataLotomania() {
+        val request = mainRepository.getLotteryData("lotomania")
+        request.enqueue(object : Callback<LotteryModel> {
+            override fun onResponse(call: Call<LotteryModel>, response: Response<LotteryModel>) {
+                _listLotteryModelLotomania.postValue(response.body())
             }
             override fun onFailure(call: Call<LotteryModel>, t: Throwable) {
                 errorMessage.postValue(t.message)

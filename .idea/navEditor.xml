@@ -44,6 +44,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragment_lotomania_result_contest">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="889" />
+                            <option name="y" value="-706" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragment_quina_result_contest">
                     <value>
                       <LayoutPositions>
@@ -77,7 +89,17 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home_list_games_to_lotomania_palpites_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home_list_games_to_megasena_palpites_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_home_list_games_to_quina_palpites_fragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -108,7 +130,17 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_list_results_to_lotomania_results_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_list_results_to_megasena_results_fragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_list_results_to_quina_results_fragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -137,6 +169,18 @@
                           <Point>
                             <option name="x" value="460" />
                             <option name="y" value="724" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="lotomania_palpite_fragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="457" />
+                            <option name="y" value="-683" />
                           </Point>
                         </option>
                       </LayoutPositions>

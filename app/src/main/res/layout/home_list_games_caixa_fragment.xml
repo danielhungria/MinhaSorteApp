@@ -133,7 +133,7 @@
                 android:layout_height="80dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="30dp"
-                app:cardBackgroundColor="#2356A0"
+                app:cardBackgroundColor="@color/status_bar_quina"
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +147,27 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view_item_lotomania"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                app:cardBackgroundColor="@color/status_bar_lotomania"
+                app:cardElevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_item_quina">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lotomania_logo" />
+
+            </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView_banner_support_fragment"
                 android:layout_width="wrap_content"
@@ -155,7 +176,7 @@
                 ads:adSize="MEDIUM_RECTANGLE"
                 ads:adUnitId="@string/ad_banner_default"
                 android:layout_marginTop="10dp"
-                ads:layout_constraintTop_toBottomOf="@+id/card_view_item_quina"
+                ads:layout_constraintTop_toBottomOf="@+id/card_view_item_lotomania"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent" />
 

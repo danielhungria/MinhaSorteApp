@@ -38,6 +38,7 @@ class HomeSavedGamesFragment: Fragment() {
         setupAdInterstitial()
         viewModel.getLotteryDataMegasena()
         viewModel.getLotteryDataLotofacil()
+        viewModel.getLotteryDataLotomania()
         viewModel.getLotteryDataFederal()
         viewModel.getLotteryDataQuina()
         viewModel.listLotteryModel.observe(viewLifecycleOwner){
@@ -48,6 +49,11 @@ class HomeSavedGamesFragment: Fragment() {
         viewModel.listLotteryModelLotofacil.observe(viewLifecycleOwner){
             it.listaDezenas?.map { it.toInt() }?.let { listNumbersResult ->
                 listPalpitesAdapter.updateNumbersResultLotofacil(listNumbersResult)
+            }
+        }
+        viewModel.listLotteryModelLotomania.observe(viewLifecycleOwner){
+            it.listaDezenas?.map { it.toInt() }?.let { listNumbersResult ->
+                listPalpitesAdapter.updateNumbersResultLotomania(listNumbersResult)
             }
         }
         viewModel.listLotteryModelFederal.observe(viewLifecycleOwner){

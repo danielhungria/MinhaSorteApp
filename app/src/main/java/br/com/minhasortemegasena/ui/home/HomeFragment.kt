@@ -43,6 +43,9 @@ class HomeFragment: Fragment() {
         binding.cardViewItemQuina.setOnClickListener {
             findNavController().navigate(R.id.action_home_list_games_to_quina_palpites_fragment)
         }
+        binding.cardViewItemLotomania.setOnClickListener {
+            findNavController().navigate(R.id.action_home_list_games_to_lotomania_palpites_fragment)
+        }
         setupAD()
     }
 

@@ -42,6 +42,9 @@ class ResultListFragment: Fragment() {
         binding.cardViewItemFederal.setOnClickListener {
             findNavController().navigate(R.id.action_list_results_to_federal_results_fragment)
         }
+        binding.cardViewItemLotomania.setOnClickListener {
+            findNavController().navigate(R.id.action_list_results_to_lotomania_results_fragment)
+        }
         setupAD()
     }
 

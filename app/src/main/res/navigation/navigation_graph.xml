@@ -48,6 +48,10 @@
             android:id="@+id/action_home_list_games_to_quina_palpites_fragment"
             app:destination="@id/quina_palpite_fragment"
             />
+        <action
+            android:id="@+id/action_home_list_games_to_lotomania_palpites_fragment"
+            app:destination="@id/lotomania_palpite_fragment"
+            />
     </fragment>
 
     <fragment
@@ -71,6 +75,10 @@
             android:id="@+id/action_list_results_to_quina_results_fragment"
             app:destination="@+id/fragment_quina_result_contest"
             />
+        <action
+            android:id="@+id/action_list_results_to_lotomania_results_fragment"
+            app:destination="@+id/fragment_lotomania_result_contest"
+            />
     </fragment>
 
     <fragment
@@ -79,9 +87,19 @@
         tools:layout="@layout/lotofacil_palpite_fragment"
         />
     <fragment
+        android:id="@+id/lotomania_palpite_fragment"
+        android:name="br.com.minhasortemegasena.ui.games.lotomania.LotomaniaPalpiteFragment"
+        tools:layout="@layout/lotomania_palpite_fragment"
+        />
+    <fragment
         android:id="@+id/fragment_lotofacil_result_contest"
         android:name="br.com.minhasortemegasena.ui.games.lotofacil.LotofacilResultFragment"
         tools:layout="@layout/fragment_lotofacil_result_contest"
+        />
+    <fragment
+        android:id="@+id/fragment_lotomania_result_contest"
+        android:name="br.com.minhasortemegasena.ui.games.lotomania.LotomaniaResultFragment"
+        tools:layout="@layout/fragment_lotomania_result_contest"
         />
     <fragment
         android:id="@+id/fragment_federal_result_contest"
@@ -108,5 +126,6 @@
         android:name="br.com.minhasortemegasena.ui.savedgames.HomeSavedGamesFragment"
         tools:layout="@layout/home_saved_games_fragment"
         />
+
 
 </navigation>

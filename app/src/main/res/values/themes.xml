@@ -30,6 +30,11 @@
         <item name="android:statusBarColor" >#A7348B</item>
     </style>
 
+    <style name="Widget.Material3.Toolbar.Lotomania" parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar.Lotomania</item>
+        <item name="android:statusBarColor" >#E69840</item>
+    </style>
+
     <style name="Widget.Material3.Toolbar.Federal" parent="Widget.Material3.Toolbar">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar.Federal</item>
         <item name="android:statusBarColor" >#2356A0</item>
@@ -43,6 +48,11 @@
     <style name="ThemeOverlay.App.Toolbar.Lotofacil" parent="">
         <item name="colorSurface">#A7348B</item>
         <item name="colorOnSurface">#A7348B</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar.Lotomania" parent="">
+        <item name="colorSurface">#E69840</item>
+        <item name="colorOnSurface">#E69840</item>
     </style>
 
     <style name="ThemeOverlay.App.Toolbar.Federal" parent="">
